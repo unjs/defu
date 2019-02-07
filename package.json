@@ -1,6 +1,6 @@
 {
   "name": "defu",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "main": "lib/index.js",
   "license": "MIT",
   "description": "Recursively assign default properties. Lightweight and Fast!",
