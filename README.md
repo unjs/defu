@@ -43,6 +43,10 @@ console.log(defu({ 'a': { 'b': 2 } }, { 'a': { 'b': 1, 'c': 3 } }))
 // => { a: { b: 2, c: 3 } }
 ```
 
+### Remarks
+
+Assignment of `__proto__` and `constructor` keys will be skipped to prevent security issues with object pollution.
+
 ## License
 
 MIT. Made with 💖
