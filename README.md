@@ -33,8 +33,8 @@ defu (object, defaults)
 
 ### Arguments
 
-**object (Object):** The destination object.
-**source (Object):** The source object.
+- **object (Object):** The destination object.
+- **source (Object):** The source object.
 
 ```js
 const defu = require('defu')
