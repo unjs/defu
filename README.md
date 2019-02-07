@@ -10,6 +10,7 @@
 [![npm version][npm-v-src]][npm-v-href]
 [![npm downloads][npm-dt-src]][npm-dt-href]
 [![package phobia][packagephobia-src]][packagephobia-href]
+[![bundle phobia][bundlephobia-src]][bundlephobia-href]
 
 ## Install
 
@@ -28,7 +29,7 @@ yarn add defu
 ## Usage
 
 ```js
-defu (object, defaults)
+const options = defu (object, defaults)
 ```
 
 ### Arguments
@@ -45,7 +46,9 @@ console.log(defu({ 'a': { 'b': 2 } }, { 'a': { 'b': 1, 'c': 3 } }))
 
 ### Remarks
 
-Assignment of `__proto__` and `constructor` keys will be skipped to prevent security issues with object pollution.
+- `object` are `defaults` are not modified
+
+- Assignment of `__proto__` and `constructor` keys will be skipped to prevent security issues with object pollution.
 
 ## License
 
@@ -63,6 +66,9 @@ MIT. Made with 💖
 
 [packagephobia-src]: https://flat.badgen.net/packagephobia/install/defu
 [packagephobia-href]: https://packagephobia.now.sh/result?p=defu
+
+[bundlephobia-src]: https://flat.badgen.net/bundlephobia/min/defu
+[bundlephobia-href]: https://bundlephobia.com/result?p=defu
 
 [david-src]: https://flat.badgen.net/david/dep/jsless/defu
 [david-href]: https://david-dm.org/jsless/defu
