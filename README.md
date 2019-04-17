@@ -46,7 +46,7 @@ console.log(defu({ 'a': { 'b': 2 } }, { 'a': { 'b': 1, 'c': 3 } }))
 
 ### Remarks
 
-- `object` are `defaults` are not modified
+- `object` and `defaults` are not modified
 
 - Assignment of `__proto__` and `constructor` keys will be skipped to prevent security issues with object pollution.
 
