@@ -4,7 +4,7 @@
   "main": "lib/index.js",
   "license": "MIT",
   "description": "Recursively assign default properties. Lightweight and Fast!",
-  "repository": "jesless/defu",
+  "repository": "jsless/defu",
   "contributes": [
     "Pooya Parsa <pooya@pi0.ir>"
   ],
