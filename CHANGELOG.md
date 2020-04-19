@@ -1,6 +1,18 @@
-# Change Log
+# Changelog
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+## [2.0.0](https://github.com/nuxt-contrib/defu/compare/v1.0.0...v2.0.0) (2020-04-19)
+
+
+### ⚠ BREAKING CHANGES
+
+* lib changed to dist
+
+### Features
+
+* multi defaults ([89ef702](https://github.com/nuxt-contrib/defu/commit/89ef702736b49cd48ca99a0dc64aa6ef3bd74e2d))
+* rewrite to typescript ([9c906e6](https://github.com/nuxt-contrib/defu/commit/9c906e64459da64d77124224edb66034ce92f20c))
 
 <a name="1.0.0"></a>
 # [1.0.0](https://github.com/jsless/defu/compare/v0.0.4...v1.0.0) (2020-02-02)
