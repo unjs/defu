@@ -1,4 +1,4 @@
-const defu = require('..')
+import defu from '../src/defu'
 
 // Part of tests brought from jonschlinkert/defaults-deep (MIT)
 
@@ -34,6 +34,7 @@ describe('defu', () => {
     defu({}, payload)
     defu(payload, {})
     defu(payload, payload)
+    // @ts-ignore
     expect({}.isAdmin).toBe(undefined)
   })
 })

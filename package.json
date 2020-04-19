@@ -1,33 +1,37 @@
 {
   "name": "defu",
   "version": "1.0.0",
-  "main": "lib/index.js",
-  "license": "MIT",
   "description": "Recursively assign default properties. Lightweight and Fast!",
-  "repository": "jsless/defu",
-  "contributes": [
-    "Pooya Parsa <pooya@pi0.ir>"
+  "repository": "nuxt-contrib/defu",
+  "license": "MIT",
+  "main": "./dist/defu.js",
+  "browser": "./dist/defu.min.js",
+  "types": "./types",
+  "files": [
+    "dist",
+    "types"
   ],
   "scripts": {
-    "lint": "eslint lib",
-    "test": "npm run lint && npm run jest",
-    "jest": "jest",
-    "release": "standard-version && git push --follow-tags && npm publish",
-    "prepare": "npm run test"
+    "build": "rollup -c && tsc --emitDeclarationOnly",
+    "lint": "eslint --ext .ts src",
+    "prepublish": "yarn build",
+    "release": "yarn test && yarn build && standard-version && git push --follow-tags && npm publish",
+    "test": "yarn lint && yarn jest"
   },
-  "files": [
-    "lib"
-  ],
   "devDependencies": {
-    "codecov": "^3.1.0",
-    "eslint": "^5.9.0",
-    "eslint-config-standard": "^12.0.0",
-    "eslint-plugin-import": "^2.14.0",
-    "eslint-plugin-jest": "^22.1.0",
-    "eslint-plugin-node": "^8.0.0",
-    "eslint-plugin-promise": "^4.0.1",
-    "eslint-plugin-standard": "^4.0.0",
-    "jest": "^24.0.0",
-    "standard-version": "^4.4.0"
+    "@babel/preset-env": "latest",
+    "@babel/preset-typescript": "latest",
+    "@nuxtjs/eslint-config-typescript": "latest",
+    "@types/jest": "latest",
+    "@types/node": "latest",
+    "eslint": "latest",
+    "jest": "latest",
+    "rollup": "latest",
+    "rollup-plugin-babel": "latest",
+    "rollup-plugin-node-resolve": "latest",
+    "rollup-plugin-terser": "latest",
+    "standard-version": "latest",
+    "ts-jest": "latest",
+    "typescript": "latest"
   }
 }
