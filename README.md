@@ -29,8 +29,10 @@ yarn add defu
 ## Usage
 
 ```js
-const options = defu (object, defaults)
+const options = defu (object, defaults...)
 ```
+
+Most left arguments have more perioriry when assigning defaults.
 
 ### Arguments
 

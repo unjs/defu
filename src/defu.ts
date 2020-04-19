@@ -6,13 +6,13 @@ type defuObj = {
   [key: string]: defuObj | any,
 }
 
-function defu<T extends defuObj> (baseObj: T | any, defaults: T | any): T {
+function _defu<T extends defuObj> (baseObj: T | any, defaults: T | any): T {
   if (!isObject(baseObj)) {
-    return defu({}, defaults)
+    return _defu({}, defaults)
   }
 
   if (!isObject(defaults)) {
-    return defu(baseObj, {})
+    return _defu(baseObj, {})
   }
 
   const obj = Object.assign({}, defaults)
@@ -29,13 +29,17 @@ function defu<T extends defuObj> (baseObj: T | any, defaults: T | any): T {
     }
 
     if (isObject(val) && isObject(obj[key])) {
-      obj[key] = defu(val, obj[key])
+      obj[key] = _defu(val, obj[key])
     } else {
       obj[key] = val
     }
   }
 
   return obj
+}
+
+function defu<T extends defuObj> (...args: T | any): T {
+  return args.reduce((p, c) => _defu(p, c), {})
 }
 
 export default defu

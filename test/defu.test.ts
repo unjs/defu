@@ -29,6 +29,14 @@ describe('defu', () => {
     }
   })
 
+  it('multi defaults', () => {
+    expect(defu({ a: 1 }, { b: 2, a: 'x' }, { c: 3, a: 'x', b: 'x' })).toEqual({
+      a: 1,
+      b: 2,
+      c: 3
+    })
+  })
+
   it('should not override Object prototype', () => {
     const payload = JSON.parse('{"constructor": {"prototype": {"isAdmin": true}}}')
     defu({}, payload)
