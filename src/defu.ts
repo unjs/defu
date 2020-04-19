@@ -39,7 +39,7 @@ function _defu<T extends defuObj> (baseObj: T | any, defaults: T | any): T {
 }
 
 function defu<T extends defuObj> (...args: T | any): T {
-  return args.reduce((p, c) => _defu(p, c), {})
+  return args.reduce(_defu, {})
 }
 
 export default defu
