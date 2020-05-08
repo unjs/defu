@@ -6,7 +6,7 @@
   "license": "MIT",
   "main": "./dist/defu.js",
   "browser": "./dist/defu.min.js",
-  "types": "./types",
+  "types": "./types/defu.d.ts",
   "files": [
     "dist",
     "types"
