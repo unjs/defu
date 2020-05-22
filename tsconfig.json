@@ -2,16 +2,7 @@
   "compilerOptions": {
     "target": "ESNext",
     "module": "ESNext",
-    "importHelpers": false,
-    "noEmitHelpers": true,
-    "strict": false,
-    "esModuleInterop": true,
-    "outDir": "dist",
-    "declaration": true,
-    "declarationDir": "types",
-    "types": [
-      "node"
-    ],
+    "declaration": true
   },
   "include": [
     "src"

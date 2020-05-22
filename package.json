@@ -5,31 +5,26 @@
   "repository": "nuxt-contrib/defu",
   "license": "MIT",
   "main": "./dist/defu.js",
-  "browser": "./dist/defu.min.js",
-  "types": "./types/defu.d.ts",
+  "types": "./defu/defu.d.ts",
   "files": [
     "dist",
     "types"
   ],
   "scripts": {
-    "build": "rollup -c && tsc --emitDeclarationOnly",
+    "build": "bili src/defu.ts",
     "lint": "eslint --ext .ts src",
     "prepublish": "yarn build",
     "release": "yarn test && yarn build && standard-version && git push --follow-tags && npm publish",
     "test": "yarn lint && yarn jest"
   },
   "devDependencies": {
-    "@babel/preset-env": "latest",
-    "@babel/preset-typescript": "latest",
     "@nuxtjs/eslint-config-typescript": "latest",
     "@types/jest": "latest",
     "@types/node": "latest",
+    "bili": "latest",
     "eslint": "latest",
     "jest": "latest",
-    "rollup": "latest",
-    "rollup-plugin-babel": "latest",
-    "rollup-plugin-node-resolve": "latest",
-    "rollup-plugin-terser": "latest",
+    "rollup-plugin-typescript2": "^0.27.1",
     "standard-version": "latest",
     "ts-jest": "latest",
     "typescript": "latest"
