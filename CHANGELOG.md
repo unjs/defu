@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.0.3](https://github.com/nuxt-contrib/defu/compare/v2.0.2...v2.0.3) (2020-05-22)
+
+
+### Bug Fixes
+
+* specify type declaration file more precisely ([#15](https://github.com/nuxt-contrib/defu/issues/15)) ([6aa47d4](https://github.com/nuxt-contrib/defu/commit/6aa47d4a06a117b34b5e9231b04f8403056c2685))
+
 ### [2.0.2](https://github.com/nuxt-contrib/defu/compare/v2.0.1...v2.0.2) (2020-04-19)
 
 ### [2.0.1](https://github.com/nuxt-contrib/defu/compare/v2.0.0...v2.0.1) (2020-04-19)
