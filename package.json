@@ -5,10 +5,9 @@
   "repository": "nuxt-contrib/defu",
   "license": "MIT",
   "main": "./dist/defu.js",
-  "types": "./defu/defu.d.ts",
+  "types": "./dist/defu.d.ts",
   "files": [
-    "dist",
-    "types"
+    "dist"
   ],
   "scripts": {
     "build": "bili src/defu.ts",
@@ -24,7 +23,7 @@
     "bili": "latest",
     "eslint": "latest",
     "jest": "latest",
-    "rollup-plugin-typescript2": "^0.27.1",
+    "rollup-plugin-typescript2": "latest",
     "standard-version": "latest",
     "ts-jest": "latest",
     "typescript": "latest"
