@@ -1,6 +1,6 @@
 {
   "name": "defu",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "description": "Recursively assign default properties. Lightweight and Fast!",
   "repository": "nuxt-contrib/defu",
   "license": "MIT",
