@@ -7,10 +7,6 @@ type defuObj = {
 }
 
 function _defu<T extends defuObj> (baseObj: T | any, defaults: T | any): T {
-  if (!isObject(baseObj)) {
-    return _defu({}, defaults)
-  }
-
   if (!isObject(defaults)) {
     return _defu(baseObj, {})
   }
@@ -28,7 +24,11 @@ function _defu<T extends defuObj> (baseObj: T | any, defaults: T | any): T {
       continue
     }
 
-    if (isObject(val) && isObject(obj[key])) {
+    if (Array.isArray(val) && Array.isArray(obj[key])) {
+      obj[key] = obj[key].concat(val)
+    } else if (typeof val === 'function' && Array.isArray(obj[key])) {
+      obj[key] = val(obj[key])
+    } else if (isObject(val) && isObject(obj[key])) {
       obj[key] = _defu(val, obj[key])
     } else {
       obj[key] = val
