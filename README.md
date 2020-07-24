@@ -17,13 +17,9 @@
 Install package:
 
 ```bash
-npm install defu
-```
-
-OR
-
-```bash
 yarn add defu
+# or
+npm install defu
 ```
 
 ## Usage
@@ -51,6 +47,15 @@ console.log(defu({ 'a': { 'b': 2 } }, { 'a': { 'b': 1, 'c': 3 } }))
 - `object` and `defaults` are not modified
 - `null` values are skipped same as [defaults-deep](https://www.npmjs.com/package/defaults-deep). Please use either [omit-deep](http://npmjs.com/package/omit-deep) or [lodash.defaultsdeep](https://www.npmjs.com/package/lodash.defaultsdeep) if you need to to preserve.
 - Assignment of `__proto__` and `constructor` keys will be skipped to prevent security issues with object pollution.
+- Will concat `array` by default, you can use a `function` to overwrite the defaults
+```js
+console.log(defu({ array: ['b', 'c'] }, { array: ['a'] }))
+// => { array: ['a', 'b', 'c']}
+console.log(defu({ array: () => ['a', 'b'] }, { array: ['c'] }))
+// => { array: ['a', 'b']}
+console.log(defu({ array: (defaults) => defaults }, { array: ['c'] }))
+// => { array: ['c']}
+```
 
 ## License
 
@@ -72,11 +77,11 @@ MIT. Made with 💖
 [bundlephobia-src]: https://flat.badgen.net/bundlephobia/min/defu
 [bundlephobia-href]: https://bundlephobia.com/result?p=defu
 
-[david-src]: https://flat.badgen.net/david/dep/jsless/defu
-[david-href]: https://david-dm.org/jsless/defu
+[david-src]: https://flat.badgen.net/david/dep/nuxt-contrib/defu
+[david-href]: https://david-dm.org/nuxt-contrib/defu
 
-[codecov-src]: https://flat.badgen.net/codecov/c/github/jsless/defu/master
-[codecov-href]: https://codecov.io/gh/jsless/defu
+[codecov-src]: https://flat.badgen.net/codecov/c/github/nuxt-contrib/defu/master
+[codecov-href]: https://codecov.io/gh/nuxt-contrib/defu
 
-[circleci-src]: https://flat.badgen.net/circleci/github/jsless/defu/master
-[circleci-href]: https://circleci.com/gh/jsless/defu
+[circleci-src]: https://flat.badgen.net/circleci/github/nuxt-contrib/defu/master
+[circleci-href]: https://circleci.com/gh/nuxt-contrib/defu
