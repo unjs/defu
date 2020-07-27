@@ -21,6 +21,14 @@ describe('defu', () => {
     expect(defu({ array: ['b', 'c'] }, { array: ['a'] })).toEqual({ array: ['a', 'b', 'c'] })
   })
 
+  it('should overwrite array when providing a function', () => {
+    expect(defu({ array: () => ['a', 'b'] }, { array: ['c'] })).toEqual({ array: ['a', 'b'] })
+  })
+
+  it('should give defaults to function when providing a function on array property', () => {
+    expect(defu({ array: (defaults) => defaults }, { array: ['c'] })).toEqual({ array: ['c'] })
+  })
+
   it('should handle non object first param', () => {
     for (const val of nonObject) {
       expect(defu(val, { d: true })).toEqual({ d: true })
