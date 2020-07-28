@@ -54,4 +54,20 @@ describe('defu', () => {
   it('should ignore non-object arguments', () => {
     expect(defu(null, { foo: 1 }, false, 123, { bar: 2 })).toEqual({ foo: 1, bar: 2 })
   })
+
+  it('custom merger', () => {
+    const ext = defu.extend((obj, key, val) => {
+      if (typeof val === 'number') {
+        obj[key] += val
+        return true
+      }
+    })
+    expect(ext({ cost: 15 }, { cost: 10 }))
+      .toEqual({ cost: 25 })
+  })
+
+  it('fn merger', () => {
+    expect(defu.fn({ ignore: val => val.filter(i => i !== 'dist') }, { ignore: ['node_modules', 'dist'] }))
+      .toEqual({ ignore: ['node_modules'] })
+  })
 })
