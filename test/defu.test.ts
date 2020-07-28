@@ -11,6 +11,7 @@ describe('defu', () => {
 
   it('should fill in values that are null', () => {
     expect(defu({ a: null }, { a: 'c', d: 'c' })).toEqual({ a: 'c', d: 'c' })
+    expect(defu({ a: 'c' }, { a: null, d: 'c' })).toEqual({ a: 'c', d: 'c' })
   })
 
   it('should copy nested values', () => {
