@@ -2,11 +2,7 @@ function isObject (val: any) {
   return val !== null && typeof val === 'object'
 }
 
-type defuObj = {
-  [key: string]: defuObj | any,
-}
-
-function _defu<T extends defuObj> (baseObj: T | any, defaults: T | any): T {
+function _defu <T> (baseObj: T, defaults: any): T {
   if (!isObject(defaults)) {
     return _defu(baseObj, {})
   }
@@ -36,7 +32,7 @@ function _defu<T extends defuObj> (baseObj: T | any, defaults: T | any): T {
   return obj
 }
 
-function defu<T extends defuObj> (...args: T | any): T {
+function defu <T> (...args: T | any): T {
   return args.reduce(_defu, {})
 }
 
