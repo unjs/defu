@@ -1,5 +1,5 @@
 function isObject (val: any) {
-  return val !== null && typeof val === 'object' && !Array.isArray(val)
+  return val !== null && typeof val === 'object'
 }
 
 type defuObj = {
