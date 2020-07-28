@@ -49,4 +49,8 @@ describe('defu', () => {
     // @ts-ignore
     expect({}.isAdmin).toBe(undefined)
   })
+
+  it('should ignore non-object arguments', () => {
+    expect(defu(null, { foo: 1 }, false, 123, { bar: 2 })).toEqual({ foo: 1, bar: 2 })
+  })
 })
