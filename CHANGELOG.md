@@ -32,22 +32,22 @@ All notable changes to this project will be documented in this file. See [standa
 * Typescript rewrite ([9c906e6](https://github.com/nuxt-contrib/defu/commit/9c906e64459da64d77124224edb66034ce92f20c))
 
 <a name="1.0.0"></a>
-# [1.0.0](https://github.com/jsless/defu/compare/v0.0.4...v1.0.0) (2020-02-02)
+# [1.0.0](https://github.com/nuxt-contrib/defu/compare/v0.0.4...v1.0.0) (2020-02-02)
 
 
 
 <a name="0.0.4"></a>
-## [0.0.4](https://github.com/jsless/defu/compare/v0.0.3...v0.0.4) (2020-01-01)
+## [0.0.4](https://github.com/nuxt-contrib/defu/compare/v0.0.3...v0.0.4) (2020-01-01)
 
 
 ### Bug Fixes
 
-* improve es5 compatibility ([#2](https://github.com/jsless/defu/issues/2), [#9](https://github.com/jsless/defu/issues/9)) ([5a6de7c](https://github.com/jsless/defu/commit/5a6de7c))
+* improve es5 compatibility ([#2](https://github.com/nuxt-contrib/defu/issues/2), [#9](https://github.com/nuxt-contrib/defu/issues/9)) ([5a6de7c](https://github.com/nuxt-contrib/defu/commit/5a6de7c))
 
 
 
 <a name="0.0.3"></a>
-## [0.0.3](https://github.com/jsless/defu/compare/v0.0.1...v0.0.3) (2019-05-25)
+## [0.0.3](https://github.com/nuxt-contrib/defu/compare/v0.0.1...v0.0.3) (2019-05-25)
 
 
 

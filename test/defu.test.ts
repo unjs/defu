@@ -13,8 +13,12 @@ describe('defu', () => {
     expect(defu({ a: null }, { a: 'c', d: 'c' })).toEqual({ a: 'c', d: 'c' })
   })
 
-  it('should copy nested values.', () => {
+  it('should copy nested values', () => {
     expect(defu({ a: { b: 'c' } }, { a: { d: 'e' } })).toEqual({ a: { b: 'c', d: 'e' } })
+  })
+
+  it('should concat array values by default', () => {
+    expect(defu({ array: ['b', 'c'] }, { array: ['a'] })).toEqual({ array: ['a', 'b', 'c'] })
   })
 
   it('should handle non object first param', () => {
