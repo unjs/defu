@@ -67,7 +67,7 @@ describe('defu', () => {
   })
 
   it('fn merger', () => {
-    expect(defu.fn({ ignore: val => val.reverse() }, { ignore: ['A', 'B'] }))
-      .toEqual({ ignore: ['B', 'A'] })
+    expect(defu.fn({ ignore: val => val.filter(i => i !== 'dist') }, { ignore: ['node_modules', 'dist'] }))
+      .toEqual({ ignore: ['node_modules'] })
   })
 })

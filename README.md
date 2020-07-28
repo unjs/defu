@@ -42,6 +42,43 @@ console.log(defu({ 'a': { 'b': 2 } }, { 'a': { 'b': 1, 'c': 3 } }))
 // => { a: { b: 2, c: 3 } }
 ```
 
+## Custom Merger
+
+Sometimes default merging strategy is not desirable. Using `defu.extend` we can create a custom instance with different merging strategy.
+
+This function accepts `obj` (target object), `key` and `value` (default value) and should return `true` if applied custom merging.
+
+**Example:** Sum numbers instead of overriding
+
+```js
+const ext = defu.extend((obj, key, val) => {
+  if (typeof val === 'number') {
+    obj[key] += val
+    return true
+  }
+})
+
+ext({ cost: 15 }, { cost: 10 }) // { cost: 25 }
+```
+
+## Function Merger
+
+Using `defu.fn`, if user provided a function, it will be called with default value instead of merging. Mostly useful for array merging.
+
+**Example:** Filter some items from defaults (array)
+
+```js
+
+defu.fn({
+  ignore(val) => val.filter(i => i !== 'dist')
+ }, {
+   ignore: [
+     'node_modules',
+     'dist
+   ]
+ }) // { ignore: ['node_modules'] }
+```
+
 ### Remarks
 
 - `object` and `defaults` are not modified
