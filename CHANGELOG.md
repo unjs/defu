@@ -7,11 +7,11 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### ⚠ BREAKING CHANGES
 
-* merge arrays (#18)
+* defau will merge arrays too (#18)
 
 ### Features
 
-* custom and function merger ([#19](https://github.com/nuxt-contrib/defu/issues/19)) ([4932232](https://github.com/nuxt-contrib/defu/commit/493223278840132a6de2c3291b60f7b00b3fa477))
+* extend and custom merger ([#19](https://github.com/nuxt-contrib/defu/issues/19)) ([4932232](https://github.com/nuxt-contrib/defu/commit/493223278840132a6de2c3291b60f7b00b3fa477))
 * merge arrays ([#18](https://github.com/nuxt-contrib/defu/issues/18)) ([22c631e](https://github.com/nuxt-contrib/defu/commit/22c631e354d9bc50380ce7beb8914bd44feb2309))
 
 ### [2.0.4](https://github.com/nuxt-contrib/defu/compare/v2.0.3...v2.0.4) (2020-05-22)
