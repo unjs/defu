@@ -14,7 +14,7 @@ function isObject (val: any) {
 // Base function to apply defaults
 function _defu<T> (baseObj: T, defaults: any, merger?: Merger): T {
   if (!isObject(defaults)) {
-    return _defu(baseObj, {})
+    return _defu(baseObj, {}, merger)
   }
 
   const obj = Object.assign({}, defaults)
@@ -37,7 +37,7 @@ function _defu<T> (baseObj: T, defaults: any, merger?: Merger): T {
     if (Array.isArray(val) && Array.isArray(obj[key])) {
       obj[key] = obj[key].concat(val)
     } else if (isObject(val) && isObject(obj[key])) {
-      obj[key] = _defu(val, obj[key])
+      obj[key] = _defu(val, obj[key], merger)
     } else {
       obj[key] = val
     }
