@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.0.1](https://github.com/nuxt-contrib/defu/compare/v3.0.0...v3.0.1) (2020-07-29)
+
+
+### Bug Fixes
+
+* recursively pass merger ([ec09394](https://github.com/nuxt-contrib/defu/commit/ec09394d77533cd0a4753a943a5d6fbd25ef308d))
+
 ## [3.0.0](https://github.com/nuxt-contrib/defu/compare/v2.0.4...v3.0.0) (2020-07-28)
 
 
