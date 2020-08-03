@@ -5,7 +5,6 @@
 [![Standard JS][standard-src]][standard-href]
 [![david dm][david-src]][david-href]
 [![codecov][codecov-src]][codecov-href]
-[![circleci][circleci-src]][circleci-href]
 
 [![npm version][npm-v-src]][npm-v-href]
 [![npm downloads][npm-dt-src]][npm-dt-href]
@@ -28,7 +27,7 @@ npm install defu
 const options = defu (object, ...defaults)
 ```
 
-Most left arguments have more perioriry when assigning defaults.
+Leftmost arguments have more priority when assigning defaults.
 
 ### Arguments
 
@@ -82,9 +81,9 @@ defu.fn({
 ### Remarks
 
 - `object` and `defaults` are not modified
-- `null` values are skipped same as [defaults-deep](https://www.npmjs.com/package/defaults-deep). Please use either [omit-deep](http://npmjs.com/package/omit-deep) or [lodash.defaultsdeep](https://www.npmjs.com/package/lodash.defaultsdeep) if you need to to preserve.
+- `null` values are skipped same as [defaults-deep](https://www.npmjs.com/package/defaults-deep). Please use either [omit-deep](http://npmjs.com/package/omit-deep) or [lodash.defaultsdeep](https://www.npmjs.com/package/lodash.defaultsdeep) if you need to preserve.
 - Assignment of `__proto__` and `constructor` keys will be skipped to prevent security issues with object pollution.
-- Will concat `array` values (it default property is defined)
+- Will concat `array` values (if default property is defined)
 ```js
 console.log(defu({ array: ['b', 'c'] }, { array: ['a'] }))
 // => { array: [a', 'b', 'c']}
@@ -115,6 +114,3 @@ MIT. Made with 💖
 
 [codecov-src]: https://flat.badgen.net/codecov/c/github/nuxt-contrib/defu/master
 [codecov-href]: https://codecov.io/gh/nuxt-contrib/defu
-
-[circleci-src]: https://flat.badgen.net/circleci/github/nuxt-contrib/defu/master
-[circleci-href]: https://circleci.com/gh/nuxt-contrib/defu
