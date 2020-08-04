@@ -62,23 +62,58 @@ ext({ cost: 15 }, { cost: 10 }) // { cost: 25 }
 
 ## Function Merger
 
-Using `defu.fn`, if user provided a function, it will be called with default value instead of merging. Mostly useful for array merging.
+Using `defu.fn`, if user provided a function, it will be called with default value instead of merging.
 
-**Example:** Filter some items from defaults (array)
+I can be useful for default values manipulation.
+
+**Example:** Filter some items from defaults (array) and add 20 to the count default value.
 
 ```js
 
 defu.fn({
+  ignore: (val) => val.filter(item => item !== 'dist'),
+  count: (count) => count + 20
+ }, {
+   ignore: ['node_modules','dist],
+   count: 10
+ })
+ /*
+ {
+    ignore: ['node_modules'],
+    count: 30
+  }
+  */
+```
+
+**Note:** if the default value is not defined, the function defined won't be called and kept as value.
+
+## Array Function Merger
+
+`defu.arrayFn` is similar to `defu.fn` but **only applies to array values defined in defaults**.
+
+**Example:** Filter some items from defaults (array) and add 20 to the count default value.
+
+```js
+
+defu.arrayFn({
   ignore(val) => val.filter(i => i !== 'dist'),
-  num: () => 20
+  count: () => 20
  }, {
    ignore: [
      'node_modules',
      'dist
    ],
-   num: 10
- }) // { ignore: ['node_modules'], num: 20 }
+   count: 10
+ })
+ /*
+  {
+    ignore: ['node_modules'],
+    count: () => 20
+  }
+  */
 ```
+
+**Note:** the function is called only if the value defined in defaults is an aray.
 
 ### Remarks
 
@@ -88,7 +123,7 @@ defu.fn({
 - Will concat `array` values (if default property is defined)
 ```js
 console.log(defu({ array: ['b', 'c'] }, { array: ['a'] }))
-// => { array: [a', 'b', 'c']}
+// => { array: ['a', 'b', 'c']}
 ```
 
 ## License
