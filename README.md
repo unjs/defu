@@ -7,7 +7,7 @@
 [![codecov][codecov-src]][codecov-href]
 
 [![npm version][npm-v-src]][npm-v-href]
-[![npm downloads][npm-dt-src]][npm-dt-href]
+[![npm downloads][npm-dm-src]][npm-dm-href]
 [![package phobia][packagephobia-src]][packagephobia-href]
 [![bundle phobia][bundlephobia-src]][bundlephobia-href]
 
@@ -137,8 +137,8 @@ MIT. Made with 💖
 [npm-v-src]: https://flat.badgen.net/npm/v/defu/latest
 [npm-v-href]: https://npmjs.com/package/defu
 
-[npm-dt-src]: https://flat.badgen.net/npm/dt/defu
-[npm-dt-href]: https://npmjs.com/package/defu
+[npm-dm-src]: https://flat.badgen.net/npm/dm/defu
+[npm-dm-href]: https://npmjs.com/package/defu
 
 [packagephobia-src]: https://flat.badgen.net/packagephobia/install/defu
 [packagephobia-href]: https://packagephobia.now.sh/result?p=defu
