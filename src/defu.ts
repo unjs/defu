@@ -4,6 +4,7 @@ type DefuFn = <T>(...args: T | any) => T
 interface Defu {
   <T>(...args: T | any): T
   fn: DefuFn
+  arrayFn: DefuFn
   extend(merger?: Merger): DefuFn
 }
 
@@ -55,9 +56,17 @@ function extend (merger?: Merger): DefuFn {
 const defu = extend() as Defu
 
 // Custom version with function merge support
-defu.fn = extend((obj, key, value) => {
-  if (typeof value === 'function') {
-    obj[key] = value(obj[key])
+defu.fn = extend((obj, key, currentValue) => {
+  if (typeof obj[key] !== 'undefined' && typeof currentValue === 'function') {
+    obj[key] = currentValue(obj[key])
+    return true
+  }
+})
+
+// Custom version with function merge support only for defined arrays
+defu.arrayFn = extend((obj, key, currentValue) => {
+  if (Array.isArray(obj[key]) && typeof currentValue === 'function') {
+    obj[key] = currentValue(obj[key])
     return true
   }
 })
