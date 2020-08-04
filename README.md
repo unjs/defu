@@ -45,13 +45,13 @@ console.log(defu({ 'a': { 'b': 2 } }, { 'a': { 'b': 1, 'c': 3 } }))
 
 Sometimes default merging strategy is not desirable. Using `defu.extend` we can create a custom instance with different merging strategy.
 
-This function accepts `obj` (target object), `key` and `value` (default value) and should return `true` if applied custom merging.
+This function accepts `obj` (source object), `key` and `value` (current value) and should return `true` if applied custom merging.
 
 **Example:** Sum numbers instead of overriding
 
 ```js
-const ext = defu.extend((obj, key, val) => {
-  if (typeof val === 'number') {
+const ext = defu.extend((obj, key, value) => {
+  if (typeof obj[key] === 'number' && typeof value === 'number') {
     obj[key] += val
     return true
   }
@@ -69,13 +69,15 @@ Using `defu.fn`, if user provided a function, it will be called with default val
 ```js
 
 defu.fn({
-  ignore(val) => val.filter(i => i !== 'dist')
+  ignore(val) => val.filter(i => i !== 'dist'),
+  num: () => 20
  }, {
    ignore: [
      'node_modules',
      'dist
-   ]
- }) // { ignore: ['node_modules'] }
+   ],
+   num: 10
+ }) // { ignore: ['node_modules'], num: 20 }
 ```
 
 ### Remarks

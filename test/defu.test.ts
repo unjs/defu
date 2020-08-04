@@ -66,8 +66,24 @@ describe('defu', () => {
       .toEqual({ cost: 25 })
   })
 
+  it('custom merger with array', () => {
+    const ext = defu.extend((obj, key, currentValue) => {
+      if (Array.isArray(obj[key]) && typeof currentValue === 'function') {
+        obj[key] = currentValue(obj[key])
+        return true
+      }
+    })
+    expect(ext({ arr: () => ['c'] }, { arr: ['a', 'b'] }))
+      .toEqual({ arr: ['c'] })
+    const num = () => 20
+    expect(ext({ num }, { num: 10 }))
+      .toEqual({ num })
+  })
+
   it('fn merger', () => {
     expect(defu.fn({ ignore: val => val.filter(i => i !== 'dist') }, { ignore: ['node_modules', 'dist'] }))
       .toEqual({ ignore: ['node_modules'] })
+    expect(defu.fn({ num: () => 20 }, { num: 10 }))
+      .toEqual({ num: 20 })
   })
 })
