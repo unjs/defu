@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.1.0](https://github.com/nuxt-contrib/defu/compare/v3.0.1...v3.1.0) (2020-08-04)
+
+
+### Features
+
+* add defu.arrayFn ([#21](https://github.com/nuxt-contrib/defu/issues/21)) ([df05ed0](https://github.com/nuxt-contrib/defu/commit/df05ed04088d6e0f0bc1a8cd9603fae46fb59268))
+
 ### [3.0.1](https://github.com/nuxt-contrib/defu/compare/v3.0.0...v3.0.1) (2020-07-29)
 
 
