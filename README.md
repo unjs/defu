@@ -74,7 +74,7 @@ defu.fn({
   ignore: (val) => val.filter(item => item !== 'dist'),
   count: (count) => count + 20
  }, {
-   ignore: ['node_modules','dist],
+   ignore: ['node_modules','dist'],
    count: 10
  })
  /*
@@ -101,7 +101,7 @@ defu.arrayFn({
  }, {
    ignore: [
      'node_modules',
-     'dist
+     'dist'
    ],
    count: 10
  })
