@@ -22,6 +22,7 @@
     "@types/node": "latest",
     "bili": "latest",
     "eslint": "latest",
+    "expect-type": "^0.8.0",
     "jest": "latest",
     "rollup-plugin-typescript2": "latest",
     "standard-version": "latest",

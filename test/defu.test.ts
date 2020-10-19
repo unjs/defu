@@ -1,3 +1,4 @@
+import { expectTypeOf } from 'expect-type'
 import defu from '../src/defu'
 
 // Part of tests brought from jonschlinkert/defaults-deep (MIT)
@@ -6,44 +7,59 @@ const nonObject = [null, undefined, [], false, true, 123]
 
 describe('defu', () => {
   it('should copy only missing properties defaults', () => {
-    expect(defu({ a: 'c' }, { a: 'bbb', d: 'c' })).toEqual({ a: 'c', d: 'c' })
+    const result = defu({ a: 'c' }, { a: 'bbb', d: 'c' })
+    expect(result).toEqual({ a: 'c', d: 'c' })
+    expectTypeOf(result).toEqualTypeOf<{ a: string, d: string }>()
   })
 
   it('should fill in values that are null', () => {
-    expect(defu({ a: null }, { a: 'c', d: 'c' })).toEqual({ a: 'c', d: 'c' })
-    expect(defu({ a: 'c' }, { a: null, d: 'c' })).toEqual({ a: 'c', d: 'c' })
+    const result1 = defu({ a: null as null }, { a: 'c', d: 'c' })
+    expect(result1).toEqual({ a: 'c', d: 'c' })
+    expectTypeOf(result1).toEqualTypeOf<{ a: string, d: string }>()
+
+    const result2 = defu({ a: 'c' }, { a: null as null, d: 'c' })
+    expect(result2).toEqual({ a: 'c', d: 'c' })
+    expectTypeOf(result2).toEqualTypeOf<{ a: string, d: string }>()
   })
 
   it('should copy nested values', () => {
-    expect(defu({ a: { b: 'c' } }, { a: { d: 'e' } })).toEqual({
+    const result = defu({ a: { b: 'c' } }, { a: { d: 'e' } })
+    expect(result).toEqual({
       a: { b: 'c', d: 'e' },
     })
+    expectTypeOf(result).toEqualTypeOf<{ a: { b: string, d: string } }>()
   })
 
   it('should concat array values by default', () => {
-    expect(defu({ array: ['b', 'c'] }, { array: ['a'] })).toEqual({
+    const result = defu({ array: ['b', 'c'] }, { array: ['a'] })
+    expect(result).toEqual({
       array: ['a', 'b', 'c'],
     })
+    expectTypeOf(result).toEqualTypeOf<{ array: string[] }>()
   })
 
   it('should handle non object first param', () => {
     for (const val of nonObject) {
+      // @ts-expect-error
       expect(defu(val, { d: true })).toEqual({ d: true })
     }
   })
 
   it('should handle non object second param', () => {
     for (const val of nonObject) {
+      // @ts-expect-error
       expect(defu({ d: true }, val)).toEqual({ d: true })
     }
   })
 
   it('multi defaults', () => {
-    expect(defu({ a: 1 }, { b: 2, a: 'x' }, { c: 3, a: 'x', b: 'x' })).toEqual({
+    const result = defu({ a: 1 }, { b: 2, a: 'x' }, { c: 3, a: 'x', b: 'x' })
+    expect(result).toEqual({
       a: 1,
       b: 2,
       c: 3,
     })
+    expectTypeOf(result).toEqualTypeOf<{ a: string | number, b: string | number, c?: number }>()
   })
 
   it('should not override Object prototype', () => {
@@ -58,6 +74,7 @@ describe('defu', () => {
   })
 
   it('should ignore non-object arguments', () => {
+    // @ts-expect-error
     expect(defu(null, { foo: 1 }, false, 123, { bar: 2 })).toEqual({
       foo: 1,
       bar: 2,
