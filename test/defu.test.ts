@@ -84,7 +84,7 @@ describe('defu', () => {
   it('custom merger', () => {
     const ext = defu.extend((obj, key, val) => {
       if (typeof val === 'number') {
-        obj[key] += val
+        ;(obj as any)[key] += val
         return true
       }
     })
