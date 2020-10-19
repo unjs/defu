@@ -16,16 +16,12 @@
     "release": "yarn test && yarn build && standard-version && git push --follow-tags && npm publish",
     "test": "yarn lint && yarn jest"
   },
-  "resolutions": {
-    "rollup-plugin-esbuild": "2.3.0"
-  },
   "devDependencies": {
     "@nuxtjs/eslint-config-typescript": "latest",
     "@types/jest": "latest",
     "@types/node": "latest",
     "eslint": "latest",
     "jest": "latest",
-    "rollup-plugin-typescript2": "latest",
     "siroc": "^0.4.0",
     "standard-version": "latest",
     "ts-jest": "latest",
