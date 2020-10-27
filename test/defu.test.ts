@@ -42,7 +42,7 @@ describe('defu', () => {
     const item1 = { name: 'Name', age: 21 }
     const item2 = { name: 'Name', age: '42' }
     const result = defu({ items: [item1] }, { items: [item2] })
-    expect(result).toEqual({ items: [{ name: 'Name', age: 21 }] })
+    expect(result).toEqual({ items: [item2, item1] })
     expectTypeOf(result).toEqualTypeOf<{ items: Array<{ name: string, age: string } | { name: string, age: number }> }>()
   })
 
