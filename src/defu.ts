@@ -1,12 +1,4 @@
-
-type Merger = (obj: any, key: string, value: any) => any
-type DefuFn = <T>(...args: T | any) => T
-interface Defu {
-  <T>(...args: T | any): T
-  fn: DefuFn
-  arrayFn: DefuFn
-  extend(merger?: Merger): DefuFn
-}
+import type { Merger, DefuFn, Defu } from './types'
 
 function isObject (val: any) {
   return val !== null && typeof val === 'object'
@@ -49,7 +41,7 @@ function _defu<T> (baseObj: T, defaults: any, merger?: Merger): T {
 
 // Create defu wrapper with optional merger and multi arg support
 function extend (merger?: Merger): DefuFn {
-  return (...args) => args.reduce((p, c) => _defu(p, c, merger), {})
+  return (...args) => args.reduce((p, c) => _defu(p, c, merger), {} as any)
 }
 
 // Basic version

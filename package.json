@@ -21,6 +21,7 @@
     "@types/jest": "latest",
     "@types/node": "latest",
     "eslint": "latest",
+    "expect-type": "^0.8.0",
     "jest": "latest",
     "siroc": "^0.4.0",
     "standard-version": "latest",
