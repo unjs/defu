@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.2.0](https://github.com/nuxt-contrib/defu/compare/v3.1.0...v3.2.0) (2020-11-09)
+
+
+### Features
+
+* add type inference for defu result ([#24](https://github.com/nuxt-contrib/defu/issues/24)) ([934d736](https://github.com/nuxt-contrib/defu/commit/934d736da31f4824d9e135d925cece361b73c533))
+* pass namespace to custom merger ([#25](https://github.com/nuxt-contrib/defu/issues/25)) ([6bd7ef5](https://github.com/nuxt-contrib/defu/commit/6bd7ef59ce3e94b68108355942dba9ac49284523))
+
 ## [3.1.0](https://github.com/nuxt-contrib/defu/compare/v3.0.1...v3.1.0) (2020-08-04)
 
 
