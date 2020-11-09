@@ -25,7 +25,7 @@ describe('defu', () => {
   it('should copy nested values', () => {
     const result = defu({ a: { b: 'c' } }, { a: { d: 'e' } })
     expect(result).toEqual({
-      a: { b: 'c', d: 'e' },
+      a: { b: 'c', d: 'e' }
     })
     expectTypeOf(result).toEqualTypeOf<{ a: { b: string, d: string } }>()
   })
@@ -33,7 +33,7 @@ describe('defu', () => {
   it('should concat array values by default', () => {
     const result = defu({ array: ['b', 'c'] }, { array: ['a'] })
     expect(result).toEqual({
-      array: ['a', 'b', 'c'],
+      array: ['a', 'b', 'c']
     })
     expectTypeOf(result).toEqualTypeOf<{ array: string[] }>()
   })
@@ -52,7 +52,7 @@ describe('defu', () => {
 
     const result = defu({ a: fn }, { a: re })
     expect(result).toEqual({ a: fn })
-    expectTypeOf(result).toEqualTypeOf<{ a: (() => number) | RegExp }>()
+    expectTypeOf(result).toEqualTypeOf<{ a:(() => number) | RegExp }>()
   })
 
   it('should handle non object first param', () => {
@@ -74,7 +74,7 @@ describe('defu', () => {
     expect(result).toEqual({
       a: 1,
       b: 2,
-      c: 3,
+      c: 3
     })
     expectTypeOf(result).toEqualTypeOf<{ a: string | number, b: string | number, c?: number }>()
   })
@@ -94,7 +94,7 @@ describe('defu', () => {
     // @ts-expect-error
     expect(defu(null, { foo: 1 }, false, 123, { bar: 2 })).toEqual({
       foo: 1,
-      bar: 2,
+      bar: 2
     })
   })
 
@@ -113,7 +113,7 @@ describe('defu', () => {
     expect(
       defu.fn(
         {
-          ignore: (val) => val.filter((i) => i !== 'dist'),
+          ignore: val => val.filter(i => i !== 'dist'),
           num,
           ignored: num
         },
@@ -141,5 +141,21 @@ describe('defu', () => {
       arr: ['c'],
       num
     })
+  })
+
+  it('custom merger with namespace', () => {
+    const ext = defu.extend((obj, key, val, namespace) => {
+      // console.log({ obj, key, val, namespace })
+      if (key === 'modules') {
+        // TODO: It is not possible to override types with extend()
+        // @ts-ignore
+        obj[key] = namespace + ':' + [...val, ...obj[key]].sort().join(',')
+        return true
+      }
+    })
+
+    const obj1 = { modules: ['A'], foo: { bar: { modules: ['X'] } } }
+    const obj2 = { modules: ['B'], foo: { bar: { modules: ['Y'] } } }
+    expect(ext(obj1, obj2)).toEqual({ modules: ':A,B', foo: { bar: { modules: 'foo.bar:X,Y' } } })
   })
 })

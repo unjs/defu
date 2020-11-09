@@ -1,7 +1,8 @@
 export type Merger = <T extends Input, K extends keyof T>(
   obj: T,
   key: keyof T,
-  value: T[K]
+  value: T[K],
+  namespace: string
 ) => any;
 
 export type DefuFn = <Source extends Input, Defaults extends Input>(
