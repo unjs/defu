@@ -31,7 +31,7 @@ type MergeArrays<Destination, Source> = Destination extends Array<infer Destinat
 type MergeObjects<
   Destination extends Input,
   Defaults extends Input
-> = Omit<Destination, keyof Destination & keyof Defaults> & Omit<Defaults, keyof Destination & keyof Defaults> &
+> = Destination extends Defaults ? Destination : Omit<Destination, keyof Destination & keyof Defaults> & Omit<Defaults, keyof Destination & keyof Defaults> &
   {
     -readonly [Key in keyof Destination & keyof Defaults]:
       Destination[Key] extends null
