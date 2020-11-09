@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.2.1](https://github.com/nuxt-contrib/defu/compare/v3.2.0...v3.2.1) (2020-11-09)
+
+
+### Bug Fixes
+
+* **types:** correct type inference where merged types are same ([#26](https://github.com/nuxt-contrib/defu/issues/26)) ([f322607](https://github.com/nuxt-contrib/defu/commit/f322607515a5bd19b1a2f28d7e3336fee9194520))
+
 ## [3.2.0](https://github.com/nuxt-contrib/defu/compare/v3.1.0...v3.2.0) (2020-11-09)
 
 
