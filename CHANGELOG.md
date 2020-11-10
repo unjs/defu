@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.2.2](https://github.com/nuxt-contrib/defu/compare/v3.2.1...v3.2.2) (2020-11-10)
+
+
+### Bug Fixes
+
+* switch back to bili for es5 support till fixing in siroc ([07786c2](https://github.com/nuxt-contrib/defu/commit/07786c270f9bf49529d8203f31b4b9bd696a6ee3))
+
 ### [3.2.1](https://github.com/nuxt-contrib/defu/compare/v3.2.0...v3.2.1) (2020-11-09)
 
 
