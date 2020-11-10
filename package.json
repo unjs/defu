@@ -10,7 +10,7 @@
     "dist"
   ],
   "scripts": {
-    "build": "siroc build",
+    "build": "bili src/defu.ts",
     "lint": "eslint --ext .ts src",
     "prepublish": "yarn build",
     "release": "yarn test && yarn build && standard-version && git push --follow-tags && npm publish",
@@ -20,9 +20,11 @@
     "@nuxtjs/eslint-config-typescript": "latest",
     "@types/jest": "latest",
     "@types/node": "latest",
+    "bili": "^5.0.5",
     "eslint": "latest",
     "expect-type": "^0.8.0",
     "jest": "latest",
+    "rollup-plugin-typescript2": "^0.29.0",
     "siroc": "^0.4.0",
     "standard-version": "latest",
     "ts-jest": "latest",
