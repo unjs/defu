@@ -1,6 +1,8 @@
-# 🇩 defu
+![defu](https://user-images.githubusercontent.com/904724/101983802-897a3c00-3c7d-11eb-9168-d08c32a9d3cc.png)
 
-> Recursively assign default properties. Lightweight and Fast!
+# 🌊 defu
+
+> Assign default properties, recursively. Lightweight and Fast!
 
 [![Standard JS][standard-src]][standard-href]
 [![david dm][david-src]][david-href]
