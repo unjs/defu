@@ -1,4 +1,4 @@
-![defu](https://user-images.githubusercontent.com/904724/101983802-897a3c00-3c7d-11eb-9168-d08c32a9d3cc.png)
+![defu](.github/banner.svg)
 
 # 🌊 defu
 
