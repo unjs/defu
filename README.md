@@ -148,8 +148,8 @@ MIT. Made with 💖
 [bundlephobia-src]: https://flat.badgen.net/bundlephobia/min/defu
 [bundlephobia-href]: https://bundlephobia.com/result?p=defu
 
-[david-src]: https://flat.badgen.net/david/dep/nuxt-contrib/defu
-[david-href]: https://david-dm.org/nuxt-contrib/defu
+[david-src]: https://flat.badgen.net/david/dep/unjs/defu
+[david-href]: https://david-dm.org/unjs/defu
 
-[codecov-src]: https://flat.badgen.net/codecov/c/github/nuxt-contrib/defu/master
-[codecov-href]: https://codecov.io/gh/nuxt-contrib/defu
+[codecov-src]: https://flat.badgen.net/codecov/c/github/unjs/defu/master
+[codecov-href]: https://codecov.io/gh/unjs/defu

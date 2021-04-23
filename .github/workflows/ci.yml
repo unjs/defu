@@ -3,12 +3,10 @@ name: ci
 on:
   push:
     branches:
-      - master
-      - dev
+      - main
   pull_request:
     branches:
-      - master
-      - dev
+      - main
 
 jobs:
   ci:
@@ -17,7 +15,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest]
-        node: [12, 14]
+        node: [14]
 
     steps:
       - uses: actions/setup-node@v1
