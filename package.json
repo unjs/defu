@@ -7,7 +7,7 @@
   "exports": {
     ".": {
       "require": "./dist/defu.js",
-      "module": "./dist/defu.mjs"
+      "import": "./dist/defu.mjs"
     }
   },
   "main": "./dist/defu.js",
