@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.0.0](https://github.com/unjs/defu/compare/v3.2.2...v4.0.0) (2021-04-23)
+
+
+### ⚠ BREAKING CHANGES
+
+* module exports
+
+### Features
+
+* module exports ([42df406](https://github.com/unjs/defu/commit/42df406b6938bc7ffb5f628efaa9447c4e95b211))
+
 ### [3.2.2](https://github.com/unjs/defu/compare/v3.2.1...v3.2.2) (2020-11-10)
 
 
