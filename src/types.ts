@@ -1,9 +1,26 @@
+type Input = Record<string | number | symbol, any>
+
 export type Merger = <T extends Input, K extends keyof T>(
   obj: T,
   key: keyof T,
   value: T[K],
   namespace: string
 ) => any;
+
+type MergeObjects<
+  Destination extends Input,
+  Defaults extends Input
+> = Destination extends Defaults ? Destination : Omit<Destination, keyof Destination & keyof Defaults> & Omit<Defaults, keyof Destination & keyof Defaults> &
+  {
+    -readonly [Key in keyof Destination & keyof Defaults]:
+      Destination[Key] extends null
+        ? Defaults[Key] extends null
+          ? null
+          : Defaults[Key]
+        : Defaults[Key] extends null
+          ? Destination[Key]
+          : Merge<Destination[Key], Defaults[Key]> // eslint-disable-line no-use-before-define
+  }
 
 export type DefuFn = <Source extends Input, Defaults extends Input>(
   source: Source,
@@ -20,28 +37,11 @@ export interface Defu {
   extend(merger?: Merger): DefuFn;
 }
 
-type Input = Record<string | number | symbol, any>
-
 type MergeArrays<Destination, Source> = Destination extends Array<infer DestinationType>
   ? Source extends Array<infer SourceType>
     ? Array<DestinationType | SourceType>
     : Source | Array<DestinationType>
   : Source | Destination
-
-type MergeObjects<
-  Destination extends Input,
-  Defaults extends Input
-> = Destination extends Defaults ? Destination : Omit<Destination, keyof Destination & keyof Defaults> & Omit<Defaults, keyof Destination & keyof Defaults> &
-  {
-    -readonly [Key in keyof Destination & keyof Defaults]:
-      Destination[Key] extends null
-        ? Defaults[Key] extends null
-          ? null
-          : Defaults[Key]
-        : Defaults[Key] extends null
-          ? Destination[Key]
-          : Merge<Destination[Key], Defaults[Key]>
-  }
 
 export type Merge<
   Destination extends Input,
