@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.0.0](https://github.com/unjs/defu/compare/v4.0.1...v5.0.0) (2021-05-12)
+
+
+### ⚠ BREAKING CHANGES
+
+* `undefined` values will be bypassed and not consistent behavior with defaults-deep anymore.
+
+### Features
+
+* skip nullish values from source ([#29](https://github.com/unjs/defu/issues/29)) ([076f10a](https://github.com/unjs/defu/commit/076f10a77fc1384f53e0586d3c77d754cd419f06))
+
 ### [4.0.1](https://github.com/unjs/defu/compare/v4.0.0...v4.0.1) (2021-04-23)
 
 ## [4.0.0](https://github.com/unjs/defu/compare/v3.2.2...v4.0.0) (2021-04-23)
