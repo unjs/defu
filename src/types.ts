@@ -7,17 +7,19 @@ export type Merger = <T extends Input, K extends keyof T>(
   namespace: string
 ) => any;
 
+type nullish = null | undefined | void
+
 type MergeObjects<
   Destination extends Input,
   Defaults extends Input
 > = Destination extends Defaults ? Destination : Omit<Destination, keyof Destination & keyof Defaults> & Omit<Defaults, keyof Destination & keyof Defaults> &
   {
     -readonly [Key in keyof Destination & keyof Defaults]:
-      Destination[Key] extends null
-        ? Defaults[Key] extends null
-          ? null
+      Destination[Key] extends nullish
+        ? Defaults[Key] extends nullish
+          ? nullish
           : Defaults[Key]
-        : Defaults[Key] extends null
+        : Defaults[Key] extends nullish
           ? Destination[Key]
           : Merge<Destination[Key], Defaults[Key]> // eslint-disable-line no-use-before-define
   }
@@ -48,11 +50,11 @@ export type Merge<
   Defaults extends Input
 > =
   // Remove explicitly null types
-  Destination extends null
-  ? Defaults extends null
-    ? null
+  Destination extends nullish
+  ? Defaults extends nullish
+    ? nullish
     : Defaults
-  : Defaults extends null
+  : Defaults extends nullish
     ? Destination
     // Handle arrays
     : Destination extends Array<any>

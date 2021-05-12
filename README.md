@@ -120,7 +120,7 @@ defu.arrayFn({
 ### Remarks
 
 - `object` and `defaults` are not modified
-- `null` values are skipped same as [defaults-deep](https://www.npmjs.com/package/defaults-deep). Please use either [omit-deep](http://npmjs.com/package/omit-deep) or [lodash.defaultsdeep](https://www.npmjs.com/package/lodash.defaultsdeep) if you need to preserve.
+- Nullish values ([`null`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/null) and [`undefined`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined)) are skipped. Please use [defaults-deep](https://www.npmjs.com/package/defaults-deep) or [omit-deep](http://npmjs.com/package/omit-deep) or [lodash.defaultsdeep](https://www.npmjs.com/package/lodash.defaultsdeep) if you need to preserve or different behavior.
 - Assignment of `__proto__` and `constructor` keys will be skipped to prevent security issues with object pollution.
 - Will concat `array` values (if default property is defined)
 ```js
