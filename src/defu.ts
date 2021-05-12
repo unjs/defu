@@ -19,7 +19,7 @@ function _defu<T> (baseObj: T, defaults: any, namespace: string = '.', merger?: 
 
     const val = baseObj[key]
 
-    if (val === null) {
+    if (val === null || val === undefined) {
       continue
     }
 
