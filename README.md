@@ -5,9 +5,7 @@
 > Assign default properties, recursively. Lightweight and Fast!
 
 [![Standard JS][standard-src]][standard-href]
-[![david dm][david-src]][david-href]
 [![codecov][codecov-src]][codecov-href]
-
 [![npm version][npm-v-src]][npm-v-href]
 [![npm downloads][npm-dm-src]][npm-dm-href]
 [![package phobia][packagephobia-src]][packagephobia-href]
@@ -156,9 +154,6 @@ MIT. Made with 💖
 
 [bundlephobia-src]: https://flat.badgen.net/bundlephobia/min/defu
 [bundlephobia-href]: https://bundlephobia.com/result?p=defu
-
-[david-src]: https://flat.badgen.net/david/dep/unjs/defu
-[david-href]: https://david-dm.org/unjs/defu
 
 [codecov-src]: https://flat.badgen.net/codecov/c/github/unjs/defu/master
 [codecov-href]: https://codecov.io/gh/unjs/defu
