@@ -28,7 +28,7 @@ function _defu<T> (baseObj: T, defaults: any, namespace: string = '.', merger?: 
     }
 
     if (Array.isArray(val) && Array.isArray(obj[key])) {
-      obj[key] = obj[key].concat(val)
+      obj[key] = val.concat(obj[key])
     } else if (isObject(val) && isObject(obj[key])) {
       obj[key] = _defu(val, obj[key], (namespace ? `${namespace}.` : '') + key.toString(), merger)
     } else {

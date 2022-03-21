@@ -32,9 +32,9 @@ describe('defu', () => {
   })
 
   it('should concat array values by default', () => {
-    const result = defu({ array: ['b', 'c'] }, { array: ['a'] })
+    const result = defu({ array: ['a', 'b'] }, { array: ['c', 'd'] })
     expect(result).toEqual({
-      array: ['a', 'b', 'c']
+      array: ['a', 'b', 'c', 'd']
     })
     expectTypeOf(result).toEqualTypeOf<{ array: string[] }>()
   })
@@ -43,8 +43,8 @@ describe('defu', () => {
     const item1 = { name: 'Name', age: 21 }
     const item2 = { name: 'Name', age: '42' }
     const result = defu({ items: [item1] }, { items: [item2] })
-    expect(result).toEqual({ items: [item2, item1] })
-    expectTypeOf(result).toEqualTypeOf<{ items: Array<{ name: string, age: string } | { name: string, age: number }> }>()
+    expect(result).toEqual({ items: [item1, item2] })
+    expectTypeOf(result).toEqualTypeOf<{ items: Array<{ name: string, age: number } | { name: string, age: string }> }>()
   })
 
   it('should correctly merge different object types', () => {
