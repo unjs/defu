@@ -40,10 +40,16 @@ Leftmost arguments have more priority when assigning defaults.
 - **source (Object):** The source object.
 
 ```js
-const defu = require('defu')
+import { defu } from 'defu'
 
 console.log(defu({ 'a': { 'b': 2 } }, { 'a': { 'b': 1, 'c': 3 } }))
 // => { a: { b: 2, c: 3 } }
+```
+
+### Using with CommonJS
+
+```js
+const { defu } = require('defu')
 ```
 
 ## Custom Merger
