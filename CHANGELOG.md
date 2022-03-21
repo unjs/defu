@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [6.0.0](https://github.com/unjs/defu/compare/v5.0.1...v6.0.0) (2022-03-21)
+
+
+### ⚠ BREAKING CHANGES
+
+* Use named exports:
+- `import defu from 'defu'` => `import { defu } from 'defu'`
+- `defu.fn` => `import { defuFn }`
+- `defu.arrayFn` => `import { defuArrayFn }`
+* When merging input value with defaults with an array, order is reversed
+
+### Features
+
+* concat array defaults to the last ([f6df314](https://github.com/unjs/defu/commit/f6df314c26540591c3ac6534c6942edc3b06384f))
+* use named exports ([4a8fc52](https://github.com/unjs/defu/commit/4a8fc52c228d82949384a50efe8f0052e9eaba68))
+
+
+### Bug Fixes
+
+* workaround for [#32](https://github.com/unjs/defu/issues/32) ([7b1f284](https://github.com/unjs/defu/commit/7b1f284b76d2a4706b37adbdb99c49ec9d2d35aa))
+
 ### [5.0.1](https://github.com/unjs/defu/compare/v5.0.0...v5.0.1) (2022-01-13)
 
 ## [5.0.0](https://github.com/unjs/defu/compare/v4.0.1...v5.0.0) (2021-05-12)
