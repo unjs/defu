@@ -19,21 +19,22 @@
   ],
   "scripts": {
     "build": "unbuild",
+    "dev": "vitest",
     "lint": "eslint --ext .ts src",
-    "prepack": "yarn build",
-    "release": "yarn test && standard-version && git push --follow-tags && npm publish",
-    "test": "yarn lint && yarn jest"
+    "prepack": "pnpm build",
+    "release": "pnpm test && standard-version && git push --follow-tags && pnpm publish",
+    "test": "pnpm lint && pnpm vitest"
   },
   "devDependencies": {
     "@nuxtjs/eslint-config-typescript": "latest",
-    "@types/jest": "latest",
     "@types/node": "latest",
+    "c8": "^7.11.0",
     "eslint": "latest",
     "expect-type": "latest",
-    "jest": "latest",
     "standard-version": "latest",
-    "ts-jest": "latest",
     "typescript": "latest",
-    "unbuild": "latest"
-  }
+    "unbuild": "latest",
+    "vitest": "^0.7.7"
+  },
+  "packageManager": "pnpm@6.32.3"
 }

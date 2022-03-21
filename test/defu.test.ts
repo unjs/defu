@@ -1,4 +1,5 @@
 import { expectTypeOf } from 'expect-type'
+import { it, describe, expect } from 'vitest'
 import defu from '../src/defu'
 
 // Part of tests brought from jonschlinkert/defaults-deep (MIT)
