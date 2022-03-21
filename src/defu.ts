@@ -40,15 +40,16 @@ function _defu<T> (baseObj: T, defaults: any, namespace: string = '.', merger?: 
 }
 
 // Create defu wrapper with optional merger and multi arg support
-function extend (merger?: Merger): DefuFn {
+export function createDefu (merger?: Merger): DefuFn {
   return (...args) => args.reduce((p, c) => _defu(p, c, '', merger), {} as any)
 }
 
-// Basic version
-const defu = extend() as Defu
+// Standard version
+export const defu = createDefu() as Defu
+export default defu
 
 // Custom version with function merge support
-defu.fn = extend((obj, key, currentValue, _namespace) => {
+export const defuFn = createDefu((obj, key, currentValue, _namespace) => {
   if (typeof obj[key] !== 'undefined' && typeof currentValue === 'function') {
     obj[key] = currentValue(obj[key])
     return true
@@ -56,14 +57,9 @@ defu.fn = extend((obj, key, currentValue, _namespace) => {
 })
 
 // Custom version with function merge support only for defined arrays
-defu.arrayFn = extend((obj, key, currentValue, _namespace) => {
+export const defuArrayFn = createDefu((obj, key, currentValue, _namespace) => {
   if (Array.isArray(obj[key]) && typeof currentValue === 'function') {
     obj[key] = currentValue(obj[key])
     return true
   }
 })
-
-// Support user extending
-defu.extend = extend
-
-export default defu

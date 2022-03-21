@@ -7,15 +7,14 @@
   "exports": {
     ".": {
       "require": "./dist/defu.cjs",
-      "import": "./lib/defu.mjs"
+      "import": "./dist/defu.mjs"
     }
   },
   "main": "./dist/defu.cjs",
-  "module": "./lib/defu.mjs",
-  "types": "./lib/defu.d.ts",
+  "module": "./dist/defu.mjs",
+  "types": "./dist/defu.d.ts",
   "files": [
-    "dist",
-    "lib"
+    "dist"
   ],
   "scripts": {
     "build": "unbuild",

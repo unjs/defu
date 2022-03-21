@@ -1,6 +1,6 @@
 import { expectTypeOf } from 'expect-type'
 import { it, describe, expect } from 'vitest'
-import defu from '../src/defu'
+import { defu, createDefu, defuFn, defuArrayFn } from '../src/defu'
 
 // Part of tests brought from jonschlinkert/defaults-deep (MIT)
 
@@ -100,7 +100,7 @@ describe('defu', () => {
   })
 
   it('custom merger', () => {
-    const ext = defu.extend((obj, key, val) => {
+    const ext = createDefu((obj, key, val) => {
       if (typeof val === 'number') {
         ;(obj as any)[key] += val
         return true
@@ -109,10 +109,10 @@ describe('defu', () => {
     expect(ext({ cost: 15 }, { cost: 10 })).toEqual({ cost: 25 })
   })
 
-  it('defu.fn()', () => {
+  it('defuFn()', () => {
     const num = () => 20
     expect(
-      defu.fn(
+      defuFn(
         {
           ignore: val => val.filter(i => i !== 'dist'),
           num,
@@ -130,9 +130,9 @@ describe('defu', () => {
     })
   })
 
-  it('defu.arrayFn()', () => {
+  it('defuArrayFn()', () => {
     const num = () => 20
-    expect(defu.arrayFn({
+    expect(defuArrayFn({
       arr: () => ['c'],
       num
     }, {
@@ -145,7 +145,7 @@ describe('defu', () => {
   })
 
   it('custom merger with namespace', () => {
-    const ext = defu.extend((obj, key, val, namespace) => {
+    const ext = createDefu((obj, key, val, namespace) => {
       // console.log({ obj, key, val, namespace })
       if (key === 'modules') {
         // TODO: It is not possible to override types with extend()

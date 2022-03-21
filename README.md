@@ -18,15 +18,20 @@
 Install package:
 
 ```bash
+# yarn
 yarn add defu
-# or
+# npm
 npm install defu
+# pnpm
+pnpm install defu
 ```
 
 ## Usage
 
 ```js
-const options = defu (object, ...defaults)
+import { defu } from 'defu'
+
+const options = defu(object, ...defaults)
 ```
 
 Leftmost arguments have more priority when assigning defaults.
@@ -45,14 +50,16 @@ console.log(defu({ 'a': { 'b': 2 } }, { 'a': { 'b': 1, 'c': 3 } }))
 
 ## Custom Merger
 
-Sometimes default merging strategy is not desirable. Using `defu.extend` we can create a custom instance with different merging strategy.
+Sometimes default merging strategy is not desirable. Using `createDefu` we can create a custom instance with different merging strategy.
 
 This function accepts `obj` (source object), `key` and `value` (current value) and should return `true` if applied custom merging.
 
 **Example:** Sum numbers instead of overriding
 
 ```js
-const ext = defu.extend((obj, key, value) => {
+import { createDefu } from 'defu'
+
+const ext = createDefu((obj, key, value) => {
   if (typeof obj[key] === 'number' && typeof value === 'number') {
     obj[key] += val
     return true
@@ -64,15 +71,16 @@ ext({ cost: 15 }, { cost: 10 }) // { cost: 25 }
 
 ## Function Merger
 
-Using `defu.fn`, if user provided a function, it will be called with default value instead of merging.
+Using `defuFn`, if user provided a function, it will be called with default value instead of merging.
 
 I can be useful for default values manipulation.
 
 **Example:** Filter some items from defaults (array) and add 20 to the count default value.
 
 ```js
+import { defuFn } from 'defu'
 
-defu.fn({
+defuFn({
   ignore: (val) => val.filter(item => item !== 'dist'),
   count: (count) => count + 20
  }, {
@@ -91,13 +99,14 @@ defu.fn({
 
 ## Array Function Merger
 
-`defu.arrayFn` is similar to `defu.fn` but **only applies to array values defined in defaults**.
+`defuArrayFn` is similar to `defuFn` but **only applies to array values defined in defaults**.
 
 **Example:** Filter some items from defaults (array) and add 20 to the count default value.
 
 ```js
+import { defuArrayFn } from 'defu'
 
-defu.arrayFn({
+defuArrayFn({
   ignore(val) => val.filter(i => i !== 'dist'),
   count: () => 20
  }, {
