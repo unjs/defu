@@ -29,8 +29,10 @@ export type DefuFn = <Source extends Input, Defaults extends Input>(
   ...defaults: Defaults[]
 ) => MergeObjects<Source, Defaults>;
 
+type HandledNonObject = boolean | number | null | any[] | undefined
+
 export interface Defu {
-  <Source extends Input, Defaults extends Input>(source: Source, ...defaults: Defaults[]): MergeObjects<
+  <Source extends Input, Defaults extends Input>(source: Source | HandledNonObject, ...defaults: Array<Defaults | HandledNonObject>): MergeObjects<
     Source,
     Defaults
   >;
