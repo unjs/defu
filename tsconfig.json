@@ -2,9 +2,12 @@
   "compilerOptions": {
     "target": "ESNext",
     "module": "ESNext",
+    "moduleResolution": "node",
+    "skipLibCheck": true,
     "declaration": true
   },
   "include": [
-    "src"
+    "src",
+    "test"
   ]
 }

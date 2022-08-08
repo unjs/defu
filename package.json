@@ -22,7 +22,8 @@
     "lint": "eslint --ext .ts src",
     "prepack": "pnpm build",
     "release": "pnpm test && standard-version && git push --follow-tags && pnpm publish",
-    "test": "pnpm lint && pnpm vitest"
+    "test": "pnpm lint && pnpm vitest",
+    "test:types": "tsc --noEmit"
   },
   "devDependencies": {
     "@nuxtjs/eslint-config-typescript": "latest",
