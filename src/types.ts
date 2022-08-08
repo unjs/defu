@@ -1,4 +1,5 @@
 type Input = Record<string | number | symbol, any>
+type IgnoredInput = boolean | number | null | any[] | undefined
 
 export type Merger = <T extends Input, K extends keyof T>(
   obj: T,
@@ -29,10 +30,8 @@ export type DefuFn = <Source extends Input, Defaults extends Input>(
   ...defaults: Defaults[]
 ) => MergeObjects<Source, Defaults>;
 
-type HandledNonObject = boolean | number | null | any[] | undefined
-
 export interface Defu {
-  <Source extends Input, Defaults extends Input>(source: Source | HandledNonObject, ...defaults: Array<Defaults | HandledNonObject>): MergeObjects<
+  <Source extends Input, Defaults extends Input>(source: Source | IgnoredInput, ...defaults: Array<Defaults | IgnoredInput>): MergeObjects<
     Source,
     Defaults
   >;
