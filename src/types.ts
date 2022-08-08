@@ -6,7 +6,7 @@ export type Merger = <T extends Input, K extends keyof T>(
   key: keyof T,
   value: T[K],
   namespace: string
-) => any;
+) => any
 
 type nullish = null | undefined | void
 
@@ -28,16 +28,16 @@ type MergeObjects<
 export type DefuFn = <Source extends Input, Defaults extends Input>(
   source: Source,
   ...defaults: Defaults[]
-) => MergeObjects<Source, Defaults>;
+) => MergeObjects<Source, Defaults>
 
 export interface Defu {
   <Source extends Input, Defaults extends Input>(source: Source | IgnoredInput, ...defaults: Array<Defaults | IgnoredInput>): MergeObjects<
     Source,
     Defaults
-  >;
-  fn: DefuFn;
-  arrayFn: DefuFn;
-  extend(merger?: Merger): DefuFn;
+  >
+  fn: DefuFn
+  arrayFn: DefuFn
+  extend(merger?: Merger): DefuFn
 }
 
 type MergeArrays<Destination, Source> = Destination extends Array<infer DestinationType>
