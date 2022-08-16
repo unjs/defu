@@ -100,26 +100,31 @@ describe('defu', () => {
     interface SomeConfig { foo: string }
     interface SomeOtherConfig { bar: string[] }
     interface ThirdConfig { baz: number[] }
+    interface ExpectedMergedType {
+      foo: string
+      bar: string[]
+      baz: number[]
+    }
     expectTypeOf(defu({} as SomeConfig, {} as SomeOtherConfig, {} as ThirdConfig))
-      .toEqualTypeOf<SomeConfig & SomeOtherConfig & ThirdConfig>()
+      .toEqualTypeOf<ExpectedMergedType>()
   })
 
   it('should allow partials within merge chain', () => {
-    interface SomeConfig {
+    interface SomeConfig { foo: string[] }
+    interface SomeOtherConfig { bar: string[] }
+    interface ExpectedMergedType {
       foo: string[]
-    }
-    interface SomeOtherConfig {
       bar: string[]
     }
     let options: (SomeConfig & SomeOtherConfig) | undefined
 
     expectTypeOf(
       defu(options ?? {}, { foo: ['test'] }, { bar: ['test2'] }, {})
-    ).toEqualTypeOf<SomeConfig & SomeOtherConfig>()
+    ).toEqualTypeOf<ExpectedMergedType>()
 
     expectTypeOf(
       defu({ foo: ['test'] }, {}, { bar: ['test2'] }, {})
-    ).toEqualTypeOf<SomeConfig & SomeOtherConfig>()
+    ).toEqualTypeOf<ExpectedMergedType>()
   })
 
   it('custom merger', () => {
