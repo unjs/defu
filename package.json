@@ -22,18 +22,18 @@
     "lint": "eslint --ext .ts src",
     "prepack": "pnpm build",
     "release": "pnpm test && standard-version && git push --follow-tags && pnpm publish",
-    "test": "pnpm lint && pnpm vitest",
+    "test": "pnpm lint && pnpm vitest run",
     "test:types": "tsc --noEmit"
   },
   "devDependencies": {
     "@nuxtjs/eslint-config-typescript": "latest",
     "@types/node": "latest",
-    "c8": "^7.12.0",
+    "@vitest/coverage-c8": "^0.22.0",
     "eslint": "latest",
     "expect-type": "latest",
     "standard-version": "latest",
     "typescript": "latest",
-    "unbuild": "latest",
+    "unbuild": "^0.8.8",
     "vitest": "^0.22.0"
   },
   "packageManager": "pnpm@7.9.0"
