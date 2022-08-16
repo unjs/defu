@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [6.1.0](https://github.com/unjs/defu/compare/v6.0.1...v6.1.0) (2022-08-16)
+
+
+### Features
+
+* export `Defu` type helper ([#45](https://github.com/unjs/defu/issues/45)) ([551ae4c](https://github.com/unjs/defu/commit/551ae4c87c13f2188b97930eaffd72e5575e9048))
+
+
+### Bug Fixes
+
+* **types:** constrain inferred types of `Defu` ([3d3ea3e](https://github.com/unjs/defu/commit/3d3ea3e4e982591632f070bbf64e28f9d98d6bf9))
+
 ### [6.0.1](https://github.com/unjs/defu/compare/v6.0.0...v6.0.1) (2022-08-16)
 
 
