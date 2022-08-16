@@ -143,12 +143,12 @@ console.log(defu({ array: ['b', 'c'] }, { array: ['a'] }))
 
 ## Type
 
-We expose `DefuReturn` as a type utility to return a merged type that follows the rules that defu follows.
+We expose `Defu` as a type utility to return a merged type that follows the rules that defu follows.
 
 ```js
-import type { DefuReturn } from 'defu'
+import type { Defu } from 'defu'
 
-type Options = DefuReturn<{ foo: 'bar' }, [{}, { bar: 'baz' }, { something: 42 }]>
+type Options = Defu<{ foo: 'bar' }, [{}, { bar: 'baz' }, { something: 42 }]>
 // returns { foo: 'bar', bar: 'baz', 'something': 42 }
 ```
 

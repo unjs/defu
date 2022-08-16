@@ -1,4 +1,4 @@
-import type { Merger, DefuFn, Defu } from './types'
+import type { Merger, DefuFn, DefuInstance } from './types'
 
 function isObject (val: any) {
   return val !== null && typeof val === 'object'
@@ -45,7 +45,7 @@ export function createDefu (merger?: Merger): DefuFn {
 }
 
 // Standard version
-export const defu = createDefu() as Defu
+export const defu = createDefu() as DefuInstance
 export default defu
 
 // Custom version with function merge support
@@ -64,4 +64,4 @@ export const defuArrayFn = createDefu((obj, key, currentValue, _namespace) => {
   }
 })
 
-export type { DefuReturn } from './types'
+export type { Defu } from './types'
