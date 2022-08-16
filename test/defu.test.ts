@@ -75,7 +75,7 @@ describe('defu', () => {
       b: 2,
       c: 3
     })
-    expectTypeOf(result).toEqualTypeOf<{ a: string | number, b: string | number, c?: number }>()
+    expectTypeOf(result).toEqualTypeOf<{ a: string | number, b: string | number, c: number }>()
   })
 
   it('should not override Object prototype', () => {
@@ -94,6 +94,14 @@ describe('defu', () => {
       foo: 1,
       bar: 2
     })
+  })
+
+  it('should merge types of more than two objects', () => {
+    interface SomeConfig { foo: string }
+    interface SomeOtherConfig { bar: string[] }
+    interface ThirdConfig { baz: number[] }
+    expectTypeOf(defu({} as SomeConfig, {} as SomeOtherConfig, {} as ThirdConfig))
+      .toEqualTypeOf<SomeConfig & SomeOtherConfig & ThirdConfig>()
   })
 
   it('should allow partials within merge chain', () => {
