@@ -96,6 +96,24 @@ describe('defu', () => {
     })
   })
 
+  it('should allow partials within merge chain', () => {
+    interface SomeConfig {
+      foo: string[]
+    }
+    interface SomeOtherConfig {
+      bar: string[]
+    }
+    let options: (SomeConfig & SomeOtherConfig) | undefined
+
+    expectTypeOf(
+      defu(options ?? {}, { foo: ['test'] }, { bar: ['test2'] }, {})
+    ).toEqualTypeOf<SomeConfig & SomeOtherConfig>()
+
+    expectTypeOf(
+      defu({ foo: ['test'] }, {}, { bar: ['test2'] }, {})
+    ).toEqualTypeOf<SomeConfig & SomeOtherConfig>()
+  })
+
   it('custom merger', () => {
     const ext = createDefu((obj, key, val) => {
       if (typeof val === 'number') {
