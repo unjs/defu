@@ -28,9 +28,13 @@ export type MergeObjects<
 export type Defu<S extends Input, D extends Array<Input | IgnoredInput>> =
   D extends [infer F, ...infer Rest]
     ? F extends Input
-      ? Defu<MergeObjects<S, F>, Rest>
+      ? Rest extends Array<Input | IgnoredInput>
+        ? Defu<MergeObjects<S, F>, Rest>
+        : MergeObjects<S, F>
       : F extends IgnoredInput
-        ? Defu<S, Rest>
+        ? Rest extends Array<Input | IgnoredInput>
+          ? Defu<S, Rest>
+          : S
         : S
     : S
 
