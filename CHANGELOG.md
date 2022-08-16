@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [6.0.1](https://github.com/unjs/defu/compare/v6.0.0...v6.0.1) (2022-08-16)
+
+
+### Bug Fixes
+
+* add typing to allow for non-objects input args ([#42](https://github.com/unjs/defu/issues/42)) ([1f3a701](https://github.com/unjs/defu/commit/1f3a701bc3fd839344359ad5c2b358fbefd978cc))
+* merge object strings of many types  ([#44](https://github.com/unjs/defu/issues/44)) ([c7226f9](https://github.com/unjs/defu/commit/c7226f971740966282530745030123aa07ff7b17))
+
 ## [6.0.0](https://github.com/unjs/defu/compare/v5.0.1...v6.0.0) (2022-03-21)
 
 
