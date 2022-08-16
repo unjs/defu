@@ -64,4 +64,4 @@ export const defuArrayFn = createDefu((obj, key, currentValue, _namespace) => {
   }
 })
 
-export type { DefuFn, Defu, Coalesce, Merge, MergeArrays, Merger, IgnoredInput, Input, MergeObjects } from './types'
+export type { DefuReturn } from './types'

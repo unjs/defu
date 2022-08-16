@@ -25,22 +25,22 @@ export type MergeObjects<
           : Merge<Destination[Key], Defaults[Key]> // eslint-disable-line no-use-before-define
   }
 
-export type Coalesce<S extends Input, D extends Array<Input | IgnoredInput>> =
+export type DefuReturn<S extends Input, D extends Array<Input | IgnoredInput>> =
   D extends [infer F, ...infer Rest]
     ? F extends Input
-      ? Coalesce<MergeObjects<S, F>, Rest>
+      ? DefuReturn<MergeObjects<S, F>, Rest>
       : F extends IgnoredInput
-        ? Coalesce<S, Rest>
+        ? DefuReturn<S, Rest>
         : S
   : S
 
 export type DefuFn = <Source extends Input, Defaults extends Array<Input | IgnoredInput>>(
   source: Source,
   ...defaults: Defaults
-) => Coalesce<Source, Defaults>
+) => DefuReturn<Source, Defaults>
 
 export interface Defu {
-  <Source extends Input, Defaults extends Array<Input | IgnoredInput>>(source: Source | IgnoredInput, ...defaults: Defaults): Coalesce<Source, Defaults>
+  <Source extends Input, Defaults extends Array<Input | IgnoredInput>>(source: Source | IgnoredInput, ...defaults: Defaults): DefuReturn<Source, Defaults>
   fn: DefuFn
   arrayFn: DefuFn
   extend(merger?: Merger): DefuFn
