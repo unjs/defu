@@ -1,5 +1,5 @@
-type Input = Record<string | number | symbol, any>
-type IgnoredInput = boolean | number | null | any[] | Record<never, any> | undefined
+export type Input = Record<string | number | symbol, any>
+export type IgnoredInput = boolean | number | null | any[] | Record<never, any> | undefined
 
 export type Merger = <T extends Input, K extends keyof T>(
   obj: T,
@@ -10,7 +10,7 @@ export type Merger = <T extends Input, K extends keyof T>(
 
 type nullish = null | undefined | void
 
-type MergeObjects<
+export type MergeObjects<
   Destination extends Input,
   Defaults extends Input
 > = Destination extends Defaults ? Destination : Omit<Destination, keyof Destination & keyof Defaults> & Omit<Defaults, keyof Destination & keyof Defaults> &
@@ -25,7 +25,7 @@ type MergeObjects<
           : Merge<Destination[Key], Defaults[Key]> // eslint-disable-line no-use-before-define
   }
 
-type Coalesce<S extends Input, D extends Array<Input | IgnoredInput>> =
+export type Coalesce<S extends Input, D extends Array<Input | IgnoredInput>> =
   D extends [infer F, ...infer Rest]
     ? F extends Input
       ? Coalesce<MergeObjects<S, F>, Rest>
@@ -46,7 +46,7 @@ export interface Defu {
   extend(merger?: Merger): DefuFn
 }
 
-type MergeArrays<Destination, Source> = Destination extends Array<infer DestinationType>
+export type MergeArrays<Destination, Source> = Destination extends Array<infer DestinationType>
   ? Source extends Array<infer SourceType>
     ? Array<DestinationType | SourceType>
     : Source | Array<DestinationType>
