@@ -141,6 +141,17 @@ console.log(defu({ array: ['b', 'c'] }, { array: ['a'] }))
 // => { array: ['a', 'b', 'c']}
 ```
 
+## Type
+
+We expose `Defu` as a type utility to return a merged type that follows the rules that defu follows.
+
+```js
+import type { Defu } from 'defu'
+
+type Options = Defu<{ foo: 'bar' }, [{}, { bar: 'baz' }, { something: 42 }]>
+// returns { foo: 'bar', bar: 'baz', 'something': 42 }
+```
+
 ## License
 
 MIT. Made with 💖

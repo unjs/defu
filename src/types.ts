@@ -1,5 +1,5 @@
-type Input = Record<string | number | symbol, any>
-type IgnoredInput = boolean | number | null | any[] | Record<never, any> | undefined
+export type Input = Record<string | number | symbol, any>
+export type IgnoredInput = boolean | number | null | any[] | Record<never, any> | undefined
 
 export type Merger = <T extends Input, K extends keyof T>(
   obj: T,
@@ -10,7 +10,7 @@ export type Merger = <T extends Input, K extends keyof T>(
 
 type nullish = null | undefined | void
 
-type MergeObjects<
+export type MergeObjects<
   Destination extends Input,
   Defaults extends Input
 > = Destination extends Defaults ? Destination : Omit<Destination, keyof Destination & keyof Defaults> & Omit<Defaults, keyof Destination & keyof Defaults> &
@@ -25,28 +25,28 @@ type MergeObjects<
           : Merge<Destination[Key], Defaults[Key]> // eslint-disable-line no-use-before-define
   }
 
-type Coalesce<S extends Input, D extends Array<Input | IgnoredInput>> =
+export type Defu<S extends Input, D extends Array<Input | IgnoredInput>> =
   D extends [infer F, ...infer Rest]
     ? F extends Input
-      ? Coalesce<MergeObjects<S, F>, Rest>
+      ? Defu<MergeObjects<S, F>, Rest>
       : F extends IgnoredInput
-        ? Coalesce<S, Rest>
+        ? Defu<S, Rest>
         : S
-  : S
+    : S
 
 export type DefuFn = <Source extends Input, Defaults extends Array<Input | IgnoredInput>>(
   source: Source,
   ...defaults: Defaults
-) => Coalesce<Source, Defaults>
+) => Defu<Source, Defaults>
 
-export interface Defu {
-  <Source extends Input, Defaults extends Array<Input | IgnoredInput>>(source: Source | IgnoredInput, ...defaults: Defaults): Coalesce<Source, Defaults>
+export interface DefuInstance {
+  <Source extends Input, Defaults extends Array<Input | IgnoredInput>>(source: Source | IgnoredInput, ...defaults: Defaults): Defu<Source, Defaults>
   fn: DefuFn
   arrayFn: DefuFn
   extend(merger?: Merger): DefuFn
 }
 
-type MergeArrays<Destination, Source> = Destination extends Array<infer DestinationType>
+export type MergeArrays<Destination, Source> = Destination extends Array<infer DestinationType>
   ? Source extends Array<infer SourceType>
     ? Array<DestinationType | SourceType>
     : Source | Array<DestinationType>
