@@ -2,7 +2,7 @@ export type Input = Record<string | number | symbol, any>
 export type IgnoredInput = boolean | number | null | any[] | Record<never, any> | undefined
 
 export type Merger = <T extends Input, K extends keyof T>(
-  obj: T,
+  object: T,
   key: keyof T,
   value: T[K],
   namespace: string
