@@ -28,7 +28,7 @@
   "devDependencies": {
     "@types/node": "^18.11.10",
     "@vitest/coverage-c8": "^0.25.3",
-    "eslint": "^8.28.0",
+    "eslint": "^8.29.0",
     "eslint-config-unjs": "^0.0.2",
     "expect-type": "^0.15.0",
     "standard-version": "^9.5.0",
