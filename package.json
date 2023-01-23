@@ -6,6 +6,7 @@
   "license": "MIT",
   "exports": {
     ".": {
+      "types": "./dist/defu.d.ts",
       "require": "./dist/defu.cjs",
       "import": "./dist/defu.mjs"
     }
