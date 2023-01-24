@@ -1,6 +1,6 @@
 {
   "name": "defu",
-  "version": "6.1.1",
+  "version": "6.1.2",
   "description": "Recursively assign default properties. Lightweight and Fast!",
   "repository": "unjs/defu",
   "license": "MIT",

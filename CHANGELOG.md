@@ -2,6 +2,30 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## v6.1.2
+
+[compare changes](https://github.com/unjs/defu/compare/v6.1.1...v6.1.2)
+
+
+### 🩹 Fixes
+
+  - Add node16 compatible type declaration ([#73](https://github.com/unjs/defu/pull/73))
+
+### 🏡 Chore
+
+  - Fix renovate config ([#56](https://github.com/unjs/defu/pull/56))
+  - Use changelogen to release ([5e24124](https://github.com/unjs/defu/commit/5e24124))
+
+### 🎨 Styles
+
+  - Format with prettier ([26477ed](https://github.com/unjs/defu/commit/26477ed))
+
+### ❤️  Contributors
+
+- Pooya Parsa <pooya@pi0.io>
+- Daniel Roe <daniel@roe.dev>
+- Nozomu Ikuta <nick.0508.nick@gmail.com>
+
 ### [6.1.1](https://github.com/unjs/defu/compare/v6.1.0...v6.1.1) (2022-11-14)
 
 ## [6.1.0](https://github.com/unjs/defu/compare/v6.0.1...v6.1.0) (2022-08-16)
