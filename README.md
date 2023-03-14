@@ -1,15 +1,12 @@
-![defu](.github/banner.svg)
-
 # 🌊 defu
 
-> Assign default properties, recursively. Lightweight and Fast!
+Assign default properties, recursively. Lightweight and Fast.
 
-[![Standard JS][standard-src]][standard-href]
-[![codecov][codecov-src]][codecov-href]
-[![npm version][npm-v-src]][npm-v-href]
-[![npm downloads][npm-dm-src]][npm-dm-href]
-[![package phobia][packagephobia-src]][packagephobia-href]
-[![bundle phobia][bundlephobia-src]][bundlephobia-href]
+[![npm version][npm-version-src]][npm-version-href]
+[![npm downloads][npm-downloads-src]][npm-downloads-href]
+[![bundle][bundle-src]][bundle-href]
+[![Codecov][codecov-src]][codecov-href]
+[![License][license-src]][license-href]
 
 ## Install
 
@@ -157,20 +154,13 @@ type Options = Defu<{ foo: 'bar' }, [{}, { bar: 'baz' }, { something: 42 }]>
 MIT. Made with 💖
 
 <!-- Refs -->
-[standard-src]: https://flat.badgen.net/badge/code%20style/standard/green
-[standard-href]: https://standardjs.com
-
-[npm-v-src]: https://flat.badgen.net/npm/v/defu/latest
-[npm-v-href]: https://npmjs.com/package/defu
-
-[npm-dm-src]: https://flat.badgen.net/npm/dm/defu
-[npm-dm-href]: https://npmjs.com/package/defu
-
-[packagephobia-src]: https://flat.badgen.net/packagephobia/install/defu
-[packagephobia-href]: https://packagephobia.now.sh/result?p=defu
-
-[bundlephobia-src]: https://flat.badgen.net/bundlephobia/min/defu
-[bundlephobia-href]: https://bundlephobia.com/result?p=defu
-
-[codecov-src]: https://flat.badgen.net/codecov/c/github/unjs/defu/master
+[npm-version-src]: https://img.shields.io/npm/v/defu?style=flat&colorA=18181B&colorB=F0DB4F
+[npm-version-href]: https://npmjs.com/package/defu
+[npm-downloads-src]: https://img.shields.io/npm/dm/defu?style=flat&colorA=18181B&colorB=F0DB4F
+[npm-downloads-href]: https://npmjs.com/package/defu
+[codecov-src]: https://img.shields.io/codecov/c/gh/unjs/defu/main?style=flat&colorA=18181B&colorB=F0DB4F
 [codecov-href]: https://codecov.io/gh/unjs/defu
+[bundle-src]: https://img.shields.io/bundlephobia/minzip/defu?style=flat&colorA=18181B&colorB=F0DB4F
+[bundle-href]: https://bundlephobia.com/result?p=defu
+[license-src]: https://img.shields.io/github/license/unjs/defu.svg?style=flat&colorA=18181B&colorB=F0DB4F
+[license-href]: https://github.com/unjs/defu/blob/main/LICENSE
