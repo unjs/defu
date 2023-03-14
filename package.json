@@ -27,10 +27,10 @@
     "test:types": "tsc --noEmit"
   },
   "devDependencies": {
-    "@types/node": "^18.14.6",
+    "@types/node": "^18.15.3",
     "@vitest/coverage-c8": "^0.29.2",
     "changelogen": "^0.5.1",
-    "eslint": "^8.35.0",
+    "eslint": "^8.36.0",
     "eslint-config-unjs": "^0.1.0",
     "expect-type": "^0.15.0",
     "prettier": "^2.8.4",
