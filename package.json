@@ -27,16 +27,16 @@
     "test:types": "tsc --noEmit"
   },
   "devDependencies": {
-    "@types/node": "^18.15.3",
-    "@vitest/coverage-c8": "^0.29.2",
+    "@types/node": "^18.15.5",
+    "@vitest/coverage-c8": "^0.29.7",
     "changelogen": "^0.5.1",
     "eslint": "^8.36.0",
     "eslint-config-unjs": "^0.1.0",
     "expect-type": "^0.15.0",
-    "prettier": "^2.8.4",
+    "prettier": "^2.8.6",
     "typescript": "^4.9.5",
     "unbuild": "^1.1.2",
-    "vitest": "^0.29.2"
+    "vitest": "^0.29.7"
   },
-  "packageManager": "pnpm@7.29.1"
+  "packageManager": "pnpm@7.30.0"
 }
