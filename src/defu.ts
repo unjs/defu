@@ -9,10 +9,11 @@ function _defu<T>(
   baseObject: T,
   defaults: any,
   namespace = ".",
-  merger?: Merger
+  merger?: Merger,
+  clone?: boolean
 ): T {
   if (!isObject(defaults)) {
-    return _defu(baseObject, {}, namespace, merger);
+    return _defu(baseObject, {}, namespace, merger, clone);
   }
 
   const object = Object.assign({}, defaults);
@@ -22,7 +23,7 @@ function _defu<T>(
       continue;
     }
 
-    const value = baseObject[key];
+    let value = baseObject[key];
 
     if (value === null || value === undefined) {
       continue;
@@ -39,9 +40,17 @@ function _defu<T>(
         value,
         object[key],
         (namespace ? `${namespace}.` : "") + key.toString(),
-        merger
+        merger,
+        clone
       );
     } else {
+      if (clone) {
+        // eslint-disable-next-line no-var
+        var structuredClone: (x: any) => any;
+        value = structuredClone
+          ? structuredClone(value)
+          : JSON.parse(JSON.stringify(value));
+      }
       object[key] = value;
     }
   }
@@ -50,10 +59,14 @@ function _defu<T>(
 }
 
 // Create defu wrapper with optional merger and multi arg support
-export function createDefu(merger?: Merger): DefuFunction {
+export function createDefu(
+  merger?: Merger,
+  options?: { clone?: boolean }
+): DefuFunction {
+  const clone = options?.clone || false;
   return (...arguments_) =>
     // eslint-disable-next-line unicorn/no-array-reduce
-    arguments_.reduce((p, c) => _defu(p, c, "", merger), {} as any);
+    arguments_.reduce((p, c) => _defu(p, c, "", merger, clone), {} as any);
 }
 
 // Standard version
