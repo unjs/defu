@@ -62,7 +62,7 @@ import { createDefu } from 'defu'
 
 const ext = createDefu((obj, key, value) => {
   if (typeof obj[key] === 'number' && typeof value === 'number') {
-    obj[key] += val
+    obj[key] += value
     return true
   }
 })
