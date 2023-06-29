@@ -135,7 +135,7 @@ defuArrayFn({
 - Will concat `array` values (if default property is defined)
 ```js
 console.log(defu({ array: ['b', 'c'] }, { array: ['a'] }))
-// => { array: ['a', 'b', 'c']}
+// => { array: ['b', 'c', 'a'] }
 ```
 
 ## Type
