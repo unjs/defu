@@ -4,6 +4,10 @@ function isObject(value: any) {
   return value !== null && typeof value === "object";
 }
 
+function isDate(value: any) {
+  return Object.prototype.toString.call(value) === "[object Date]";
+}
+
 // Base function to apply defaults
 function _defu<T>(
   baseObject: T,
@@ -14,7 +18,9 @@ function _defu<T>(
   if (!isObject(defaults)) {
     return _defu(baseObject, {}, namespace, merger);
   }
-
+  if (isDate(defaults)) {
+    return baseObject || defaults;
+  }
   const object = Object.assign({}, defaults);
 
   for (const key in baseObject) {

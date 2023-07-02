@@ -12,6 +12,12 @@ describe("defu", () => {
     expectTypeOf(result).toEqualTypeOf<{ a: string; d: string }>();
   });
 
+  it('should return date value by Object.assign', () => {
+    const defaultObj = { date: new Date('2021-01-01'), date2: new Date('2021-01-02') }
+    const obj2 = { date: new Date('2021-01-03') }
+    expect(defu(obj2,  defaultObj)).toEqual({ date:obj2.date, date2:defaultObj.date2 })
+  })
+
   it("should fill in values that are null", () => {
     const result1 = defu({ a: null as null }, { a: "c", d: "c" });
     expect(result1).toEqual({ a: "c", d: "c" });
