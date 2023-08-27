@@ -24,7 +24,7 @@ function _defu<T>(
       continue;
     }
 
-    if (merger && merger(object, key, value, namespace)) {
+    if (merger?.(object, key, value, namespace)) {
       continue;
     }
 
