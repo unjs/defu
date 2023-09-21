@@ -74,7 +74,7 @@ ext({ cost: 15 }, { cost: 10 }) // { cost: 25 }
 
 Using `defuFn`, if user provided a function, it will be called with default value instead of merging.
 
-I can be useful for default values manipulation.
+It can be useful for default values manipulation.
 
 **Example:** Filter some items from defaults (array) and add 20 to the count default value.
 
