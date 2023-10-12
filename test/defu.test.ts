@@ -213,4 +213,12 @@ describe("defu", () => {
       foo: { bar: { modules: "foo.bar:X,Y" } },
     });
   });
+
+  it("should clone the defaults object's values", () => {
+    const ext = createDefu(undefined, { clone: true });
+    const source = { a: [1, 2] };
+    const defaults = { a: { b: 1 } };
+    const result = ext(source, defaults);
+    expect(result.a).not.toBe(source.a);
+  });
 });
