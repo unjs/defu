@@ -38,5 +38,5 @@
     "unbuild": "^1.2.1",
     "vitest": "^0.31.0"
   },
-  "packageManager": "pnpm@7.32.2"
+  "packageManager": "pnpm@8.9.0"
 }
