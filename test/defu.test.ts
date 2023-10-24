@@ -87,7 +87,7 @@ describe("defu", () => {
 
   it("should not override Object prototype", () => {
     const payload = JSON.parse(
-      '{"constructor": {"prototype": {"isAdmin": true}}}'
+      '{"constructor": {"prototype": {"isAdmin": true}}}',
     );
     defu({}, payload);
     defu(payload, {});
@@ -119,7 +119,7 @@ describe("defu", () => {
       baz: number[];
     }
     expectTypeOf(
-      defu({} as SomeConfig, {} as SomeOtherConfig, {} as ThirdConfig)
+      defu({} as SomeConfig, {} as SomeOtherConfig, {} as ThirdConfig),
     ).toEqualTypeOf<ExpectedMergedType>();
   });
 
@@ -137,11 +137,11 @@ describe("defu", () => {
     let options: (SomeConfig & SomeOtherConfig) | undefined;
 
     expectTypeOf(
-      defu(options ?? {}, { foo: ["test"] }, { bar: ["test2"] }, {})
+      defu(options ?? {}, { foo: ["test"] }, { bar: ["test2"] }, {}),
     ).toEqualTypeOf<ExpectedMergedType>();
 
     expectTypeOf(
-      defu({ foo: ["test"] }, {}, { bar: ["test2"] }, {})
+      defu({ foo: ["test"] }, {}, { bar: ["test2"] }, {}),
     ).toEqualTypeOf<ExpectedMergedType>();
   });
 
@@ -167,8 +167,8 @@ describe("defu", () => {
         {
           ignore: ["node_modules", "dist"],
           num: 10,
-        }
-      )
+        },
+      ),
     ).toEqual({
       ignore: ["node_modules"],
       num: 20,
@@ -187,8 +187,8 @@ describe("defu", () => {
         {
           arr: ["a", "b"],
           num: 10,
-        }
-      )
+        },
+      ),
     ).toEqual({
       arr: ["c"],
       num,

@@ -11,14 +11,14 @@ export type Merger = <T extends Input, K extends keyof T>(
   object: T,
   key: keyof T,
   value: T[K],
-  namespace: string
+  namespace: string,
 ) => any;
 
 type nullish = null | undefined | void;
 
 export type MergeObjects<
   Destination extends Input,
-  Defaults extends Input
+  Defaults extends Input,
 > = Destination extends Defaults
   ? Destination
   : Omit<Destination, keyof Destination & keyof Defaults> &
@@ -35,7 +35,7 @@ export type MergeObjects<
 
 export type Defu<
   S extends Input,
-  D extends Array<Input | IgnoredInput>
+  D extends Array<Input | IgnoredInput>,
 > = D extends [infer F, ...infer Rest]
   ? F extends Input
     ? Rest extends Array<Input | IgnoredInput>
@@ -50,7 +50,7 @@ export type Defu<
 
 export type DefuFn = <
   Source extends Input,
-  Defaults extends Array<Input | IgnoredInput>
+  Defaults extends Array<Input | IgnoredInput>,
 >(
   source: Source,
   ...defaults: Defaults

@@ -24,9 +24,9 @@ pnpm install defu
 ## Usage
 
 ```js
-import { defu } from 'defu'
+import { defu } from "defu";
 
-const options = defu(object, ...defaults)
+const options = defu(object, ...defaults);
 ```
 
 Leftmost arguments have more priority when assigning defaults.
@@ -37,16 +37,16 @@ Leftmost arguments have more priority when assigning defaults.
 - **source (Object):** The source object.
 
 ```js
-import { defu } from 'defu'
+import { defu } from "defu";
 
-console.log(defu({ 'a': { 'b': 2 } }, { 'a': { 'b': 1, 'c': 3 } }))
+console.log(defu({ a: { b: 2 } }, { a: { b: 1, c: 3 } }));
 // => { a: { b: 2, c: 3 } }
 ```
 
 ### Using with CommonJS
 
 ```js
-const { defu } = require('defu')
+const { defu } = require("defu");
 ```
 
 ## Custom Merger
@@ -58,16 +58,16 @@ This function accepts `obj` (source object), `key` and `value` (current value) a
 **Example:** Sum numbers instead of overriding
 
 ```js
-import { createDefu } from 'defu'
+import { createDefu } from "defu";
 
 const ext = createDefu((obj, key, value) => {
-  if (typeof obj[key] === 'number' && typeof value === 'number') {
-    obj[key] += value
-    return true
+  if (typeof obj[key] === "number" && typeof value === "number") {
+    obj[key] += value;
+    return true;
   }
-})
+});
 
-ext({ cost: 15 }, { cost: 10 }) // { cost: 25 }
+ext({ cost: 15 }, { cost: 10 }); // { cost: 25 }
 ```
 
 ## Function Merger
@@ -79,16 +79,19 @@ It can be useful for default values manipulation.
 **Example:** Filter some items from defaults (array) and add 20 to the count default value.
 
 ```js
-import { defuFn } from 'defu'
+import { defuFn } from "defu";
 
-defuFn({
-  ignore: (val) => val.filter(item => item !== 'dist'),
-  count: (count) => count + 20
- }, {
-   ignore: ['node_modules','dist'],
-   count: 10
- })
- /*
+defuFn(
+  {
+    ignore: (val) => val.filter((item) => item !== "dist"),
+    count: (count) => count + 20,
+  },
+  {
+    ignore: ["node_modules", "dist"],
+    count: 10,
+  },
+);
+/*
  {
     ignore: ['node_modules'],
     count: 30
@@ -133,8 +136,9 @@ defuArrayFn({
 - Nullish values ([`null`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/null) and [`undefined`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined)) are skipped. Please use [defaults-deep](https://www.npmjs.com/package/defaults-deep) or [omit-deep](http://npmjs.com/package/omit-deep) or [lodash.defaultsdeep](https://www.npmjs.com/package/lodash.defaultsdeep) if you need to preserve or different behavior.
 - Assignment of `__proto__` and `constructor` keys will be skipped to prevent security issues with object pollution.
 - Will concat `array` values (if default property is defined)
+
 ```js
-console.log(defu({ array: ['b', 'c'] }, { array: ['a'] }))
+console.log(defu({ array: ["b", "c"] }, { array: ["a"] }));
 // => { array: ['b', 'c', 'a'] }
 ```
 
@@ -154,6 +158,7 @@ type Options = Defu<{ foo: 'bar' }, [{}, { bar: 'baz' }, { something: 42 }]>
 MIT. Made with 💖
 
 <!-- Refs -->
+
 [npm-version-src]: https://img.shields.io/npm/v/defu?style=flat&colorA=18181B&colorB=F0DB4F
 [npm-version-href]: https://npmjs.com/package/defu
 [npm-downloads-src]: https://img.shields.io/npm/dm/defu?style=flat&colorA=18181B&colorB=F0DB4F

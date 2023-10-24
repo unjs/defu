@@ -9,7 +9,7 @@ function _defu<T>(
   baseObject: T,
   defaults: any,
   namespace = ".",
-  merger?: Merger
+  merger?: Merger,
 ): T {
   if (!isObject(defaults)) {
     return _defu(baseObject, {}, namespace, merger);
@@ -39,7 +39,7 @@ function _defu<T>(
         value,
         object[key],
         (namespace ? `${namespace}.` : "") + key.toString(),
-        merger
+        merger,
       );
     } else {
       object[key] = value;
@@ -62,10 +62,7 @@ export default defu;
 
 // Custom version with function merge support
 export const defuFn = createDefu((object, key, currentValue) => {
-  if (
-    typeof object[key] !== "undefined" &&
-    typeof currentValue === "function"
-  ) {
+  if (object[key] !== undefined && typeof currentValue === "function") {
     object[key] = currentValue(object[key]);
     return true;
   }
