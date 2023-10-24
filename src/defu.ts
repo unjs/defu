@@ -49,13 +49,18 @@ function _defu<T>(
 // MIT License
 // Copyright (c) Sindre Sorhus <sindresorhus@gmail.com> (https://sindresorhus.com)
 function _isPlainObject(value) {
-  if (value === null || typeof value !== 'object') {
+  if (value === null || typeof value !== "object") {
     return false;
   }
   const prototype = Object.getPrototypeOf(value);
-  return (prototype === null || prototype === Object.prototype || Object.getPrototypeOf(prototype) === null) && !(Symbol.toStringTag in value) && !(Symbol.iterator in value);
+  return (
+    (prototype === null ||
+      prototype === Object.prototype ||
+      Object.getPrototypeOf(prototype) === null) &&
+    !(Symbol.toStringTag in value) &&
+    !(Symbol.iterator in value)
+  );
 }
-
 
 // Create defu wrapper with optional merger and multi arg support
 export function createDefu(merger?: Merger): DefuFunction {
