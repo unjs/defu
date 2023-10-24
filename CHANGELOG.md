@@ -2,6 +2,43 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## v6.1.3
+
+[compare changes](https://github.com/unjs/defu/compare/v6.1.2...v6.1.3)
+
+### 🩹 Fixes
+
+- Only merge plain objects ([#111](https://github.com/unjs/defu/pull/111))
+
+### 📖 Documentation
+
+- Update badges ([581dd92](https://github.com/unjs/defu/commit/581dd92))
+- Fix typo ([#96](https://github.com/unjs/defu/pull/96))
+- Fix the result of the array merging ([#99](https://github.com/unjs/defu/pull/99))
+- Fix typo ([#107](https://github.com/unjs/defu/pull/107))
+
+### 📦 Build
+
+- Backward compatible cjs entry ([#110](https://github.com/unjs/defu/pull/110))
+
+### 🏡 Chore
+
+- Update dependencies ([63d0e8e](https://github.com/unjs/defu/commit/63d0e8e))
+- Enable ts strict mode ([82d68c7](https://github.com/unjs/defu/commit/82d68c7))
+- Fix tests ([59d0f6a](https://github.com/unjs/defu/commit/59d0f6a))
+
+### 🎨 Styles
+
+- Format with prettier v3 ([32650f1](https://github.com/unjs/defu/commit/32650f1))
+
+### ❤️ Contributors
+
+- Pooya Parsa ([@pi0](http://github.com/pi0))
+- Abdul Al-Hasany <info@kalimah-apps.com>
+- Kricsleo 
+- Donald Shtjefni ([@dnldsht](http://github.com/dnldsht))
+- Sébastien Chopin <seb@nuxtjs.com>
+
 ## v6.1.2
 
 [compare changes](https://github.com/unjs/defu/compare/v6.1.1...v6.1.2)
