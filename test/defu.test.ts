@@ -50,6 +50,22 @@ describe("defu", () => {
     }>();
   });
 
+  it.skip("should avoid merging objects with custom constructor", () => {
+    class Test {
+      // eslint-disable-next-line no-useless-constructor
+      constructor(public value: string) {}
+    }
+    const result = defu({ test: new Test("a") }, { test: new Test("b") });
+    expect(result).toEqual({ test: new Test("a") });
+  });
+
+  it.skip("should assign date properly", () => {
+    const date1 = new Date("2020-01-01");
+    const date2 = new Date("2020-01-02");
+    const result = defu({ date: date1 }, { date: date2 });
+    expect(result).toEqual({ date: date2 });
+  });
+
   it("should correctly merge different object types", () => {
     // eslint-disable-next-line unicorn/consistent-function-scoping
     const fn = () => 42;
