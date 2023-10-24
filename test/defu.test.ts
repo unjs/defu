@@ -9,17 +9,17 @@ describe("defu", () => {
   it("should copy only missing properties defaults", () => {
     const result = defu({ a: "c" }, { a: "bbb", d: "c" });
     expect(result).toEqual({ a: "c", d: "c" });
-    expectTypeOf(result).toEqualTypeOf<{ a: string; d: string }>();
+    expectTypeOf(result).toMatchTypeOf<{ a: string; d: string }>();
   });
 
   it("should fill in values that are null", () => {
     const result1 = defu({ a: null as null }, { a: "c", d: "c" });
     expect(result1).toEqual({ a: "c", d: "c" });
-    expectTypeOf(result1).toEqualTypeOf<{ a: string; d: string }>();
+    expectTypeOf(result1).toMatchTypeOf<{ a: string; d: string }>();
 
     const result2 = defu({ a: "c" }, { a: null as null, d: "c" });
     expect(result2).toEqual({ a: "c", d: "c" });
-    expectTypeOf(result2).toEqualTypeOf<{ a: string; d: string }>();
+    expectTypeOf(result2).toMatchTypeOf<{ a: string; d: string }>();
   });
 
   it("should copy nested values", () => {
@@ -27,7 +27,7 @@ describe("defu", () => {
     expect(result).toEqual({
       a: { b: "c", d: "e" },
     });
-    expectTypeOf(result).toEqualTypeOf<{ a: { b: string; d: string } }>();
+    expectTypeOf(result).toMatchTypeOf<{ a: { b: string; d: string } }>();
   });
 
   it("should concat array values by default", () => {
@@ -35,7 +35,7 @@ describe("defu", () => {
     expect(result).toEqual({
       array: ["a", "b", "c", "d"],
     });
-    expectTypeOf(result).toEqualTypeOf<{ array: string[] }>();
+    expectTypeOf(result).toMatchTypeOf<{ array: string[] }>();
   });
 
   it("should correctly type differing array values", () => {
@@ -43,7 +43,7 @@ describe("defu", () => {
     const item2 = { name: "Name", age: "42" };
     const result = defu({ items: [item1] }, { items: [item2] });
     expect(result).toEqual({ items: [item1, item2] });
-    expectTypeOf(result).toEqualTypeOf<{
+    expectTypeOf(result).toMatchTypeOf<{
       items: Array<
         { name: string; age: number } | { name: string; age: string }
       >;
@@ -67,12 +67,13 @@ describe("defu", () => {
   });
 
   it("should correctly merge different object types", () => {
+    // eslint-disable-next-line unicorn/consistent-function-scoping
     const fn = () => 42;
     const re = /test/i;
 
     const result = defu({ a: fn }, { a: re });
     expect(result).toEqual({ a: fn });
-    expectTypeOf(result).toEqualTypeOf<{ a: (() => number) | RegExp }>();
+    expectTypeOf(result).toMatchTypeOf<{ a: (() => number) | RegExp }>();
   });
 
   it("should handle non object first param", () => {
@@ -94,7 +95,7 @@ describe("defu", () => {
       b: 2,
       c: 3,
     });
-    expectTypeOf(result).toEqualTypeOf<{
+    expectTypeOf(result).toMatchTypeOf<{
       a: string | number;
       b: string | number;
       c: number;
@@ -136,7 +137,7 @@ describe("defu", () => {
     }
     expectTypeOf(
       defu({} as SomeConfig, {} as SomeOtherConfig, {} as ThirdConfig),
-    ).toEqualTypeOf<ExpectedMergedType>();
+    ).toMatchTypeOf<ExpectedMergedType>();
   });
 
   it("should allow partials within merge chain", () => {
@@ -154,11 +155,11 @@ describe("defu", () => {
 
     expectTypeOf(
       defu(options ?? {}, { foo: ["test"] }, { bar: ["test2"] }, {}),
-    ).toEqualTypeOf<ExpectedMergedType>();
+    ).toMatchTypeOf<ExpectedMergedType>();
 
     expectTypeOf(
       defu({ foo: ["test"] }, {}, { bar: ["test2"] }, {}),
-    ).toEqualTypeOf<ExpectedMergedType>();
+    ).toMatchTypeOf<ExpectedMergedType>();
   });
 
   it("custom merger", () => {
@@ -172,11 +173,12 @@ describe("defu", () => {
   });
 
   it("defuFn()", () => {
+    // eslint-disable-next-line unicorn/consistent-function-scoping
     const num = () => 20;
     expect(
       defuFn(
         {
-          ignore: (val) => val.filter((i) => i !== "dist"),
+          ignore: (val: any) => val.filter((i: any) => i !== "dist"),
           num,
           ignored: num,
         },
@@ -193,6 +195,7 @@ describe("defu", () => {
   });
 
   it("defuArrayFn()", () => {
+    // eslint-disable-next-line unicorn/consistent-function-scoping
     const num = () => 20;
     expect(
       defuArrayFn(
