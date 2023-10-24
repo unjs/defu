@@ -48,7 +48,7 @@ function _defu<T>(
 // From sindresorhus/is-plain-obj
 // MIT License
 // Copyright (c) Sindre Sorhus <sindresorhus@gmail.com> (https://sindresorhus.com)
-function _isPlainObject(value) {
+function _isPlainObject(value: unknown): boolean {
   if (value === null || typeof value !== "object") {
     return false;
   }
