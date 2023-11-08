@@ -82,7 +82,7 @@ export const defuArrayFn = createDefu((object, key, currentValue) => {
 export const defuSchema = createDefu((schema, key) => {
   // Checking for hasOwnProperty is required for compatibility with older browsers
   if (
-    !Object.hasOwn?.(schema, key) ||
+    ('hasOwn' in Object && !Object.hasOwn(schema, key)) ||
     !Object.prototype.hasOwnProperty.call(schema, key)
   ) {
     return true;
