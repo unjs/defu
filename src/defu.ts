@@ -80,14 +80,7 @@ export const defuArrayFn = createDefu((object, key, currentValue) => {
 
 // Custom version for skipping keys not present in defaults
 export const defuSchema = createDefu((schema, key) => {
-  // Checking for hasOwnProperty is required for compatibility with older browsers
-  if (
-    ('hasOwn' in Object && !Object.hasOwn(schema, key)) ||
-    !Object.prototype.hasOwnProperty.call(schema, key)
-  ) {
-    return true;
-  }
-  return false;
+  return !(key in schema);
 }) as DefuFnSchema;
 
 export type { Defu } from "./types";
