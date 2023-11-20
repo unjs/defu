@@ -111,7 +111,7 @@ defuFn(
 import { defuArrayFn } from 'defu'
 
 defuArrayFn({
-  ignore(val) => val.filter(i => i !== 'dist'),
+  ignore: (val) => val.filter(i => i !== 'dist'),
   count: () => 20
  }, {
    ignore: [
