@@ -64,7 +64,7 @@ describe("defu", () => {
     const date1 = new Date("2020-01-01");
     const date2 = new Date("2020-01-02");
     const result = defu({ date: date1 }, { date: date2 });
-    // Ensure to override, not merge 
+    // Ensure to override, not merge
     expect(result).toEqual({ date: date1 });
   });
 
