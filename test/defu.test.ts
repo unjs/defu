@@ -50,7 +50,7 @@ describe("defu", () => {
     }>();
   });
 
-  it.skip("should avoid merging objects with custom constructor", () => {
+  it("should avoid merging objects with custom constructor", () => {
     class Test {
       // eslint-disable-next-line no-useless-constructor
       constructor(public value: string) {}
