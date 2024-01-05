@@ -50,7 +50,7 @@ describe("defu", () => {
     }>();
   });
 
-  it.skip("should avoid merging objects with custom constructor", () => {
+  it("should avoid merging objects with custom constructor", () => {
     class Test {
       // eslint-disable-next-line no-useless-constructor
       constructor(public value: string) {}
@@ -59,11 +59,11 @@ describe("defu", () => {
     expect(result).toEqual({ test: new Test("a") });
   });
 
-  it.skip("should assign date properly", () => {
+  it("should assign date properly", () => {
     const date1 = new Date("2020-01-01");
     const date2 = new Date("2020-01-02");
     const result = defu({ date: date1 }, { date: date2 });
-    expect(result).toEqual({ date: date2 });
+    expect(result).toEqual({ date: date1 });
   });
 
   it("should correctly merge different object types", () => {
