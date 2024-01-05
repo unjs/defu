@@ -1,6 +1,7 @@
 import { expectTypeOf } from "expect-type";
 import { it, describe, expect } from "vitest";
 import { defu, createDefu, defuFn, defuArrayFn } from "../src/defu";
+import * as asteriskImport from "./fixtures/";
 
 // Part of tests brought from jonschlinkert/defaults-deep (MIT)
 const nonObject = [null, undefined, [], false, true, 123];
@@ -230,6 +231,23 @@ describe("defu", () => {
     expect(ext(obj1, obj2)).toEqual({
       modules: ":A,B",
       foo: { bar: { modules: "foo.bar:X,Y" } },
+    });
+  });
+
+  it("works with asterisk-import", () => {
+    expect(
+      defu(asteriskImport, {
+        a: 2,
+        exp: {
+          anotherNested: 2,
+        },
+      }),
+    ).toStrictEqual({
+      a: 2,
+      exp: {
+        anotherNested: 2,
+        nested: 1,
+      },
     });
   });
 });
