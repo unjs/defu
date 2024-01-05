@@ -2,6 +2,39 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## v6.1.4
+
+[compare changes](https://github.com/unjs/defu/compare/v6.1.3...v6.1.4)
+
+### 🩹 Fixes
+
+- Merge objects with `Module` type ([#121](https://github.com/unjs/defu/pull/121))
+
+### 💅 Refactors
+
+- Move `isPlainObject` to `_utils` to allow testing ([e922a16](https://github.com/unjs/defu/commit/e922a16))
+- Make `isPlainObject` logic more readable ([e458b63](https://github.com/unjs/defu/commit/e458b63))
+
+### 📖 Documentation
+
+- Fix typo ([#116](https://github.com/unjs/defu/pull/116))
+
+### 🏡 Chore
+
+- **release:** V6.1.3 ([3834ca1](https://github.com/unjs/defu/commit/3834ca1))
+- Update deps and lint ([e5a48d3](https://github.com/unjs/defu/commit/e5a48d3))
+- Enable `skipLipCheck` for type tests ([7c7a9a4](https://github.com/unjs/defu/commit/7c7a9a4))
+
+### ✅ Tests
+
+- Improve tests for isPlainObject ([b24a213](https://github.com/unjs/defu/commit/b24a213))
+
+### ❤️ Contributors
+
+- Alexander Lichter ([@manniL](http://github.com/manniL))
+- Pooya Parsa ([@pi0](http://github.com/pi0))
+- Yu Le <is.yuler@gmail.com>
+
 ## v6.1.3
 
 [compare changes](https://github.com/unjs/defu/compare/v6.1.2...v6.1.3)
