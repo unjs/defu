@@ -10,7 +10,6 @@ function _defu<T>(
   if (!_isPlainObject(defaults)) {
     return _defu(baseObject, {}, namespace, merger);
   }
-
   const object = Object.assign({}, defaults);
 
   for (const key in baseObject) {
@@ -57,8 +56,7 @@ function _isPlainObject(value: unknown): boolean {
     (prototype === null ||
       prototype === Object.prototype ||
       Object.getPrototypeOf(prototype) === null) &&
-    !(Symbol.toStringTag in value) &&
-    !(Symbol.iterator in value)
+    (!(Symbol.toStringTag in value) || !(Symbol.iterator in value))
   );
 }
 

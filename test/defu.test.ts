@@ -1,6 +1,7 @@
 import { expectTypeOf } from "expect-type";
 import { it, describe, expect } from "vitest";
 import { defu, createDefu, defuFn, defuArrayFn } from "../src/defu";
+import * as asteriskImport from "./fixtures/";
 
 // Part of tests brought from jonschlinkert/defaults-deep (MIT)
 const nonObject = [null, undefined, [], false, true, 123];
@@ -59,11 +60,12 @@ describe("defu", () => {
     expect(result).toEqual({ test: new Test("a") });
   });
 
-  it.skip("should assign date properly", () => {
+  it("should not merge dates but override", () => {
     const date1 = new Date("2020-01-01");
     const date2 = new Date("2020-01-02");
     const result = defu({ date: date1 }, { date: date2 });
-    expect(result).toEqual({ date: date2 });
+    // Ensure to override, not merge 
+    expect(result).toEqual({ date: date1 });
   });
 
   it("should correctly merge different object types", () => {
@@ -230,6 +232,23 @@ describe("defu", () => {
     expect(ext(obj1, obj2)).toEqual({
       modules: ":A,B",
       foo: { bar: { modules: "foo.bar:X,Y" } },
+    });
+  });
+
+  it("works with asterisk-import", () => {
+    expect(
+      defu(asteriskImport, {
+        a: 2,
+        exp: {
+          anotherNested: 2,
+        },
+      }),
+    ).toStrictEqual({
+      a: 2,
+      exp: {
+        anotherNested: 2,
+        nested: 1,
+      },
     });
   });
 });
