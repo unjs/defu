@@ -14,8 +14,12 @@ export function isPlainObject(value: unknown): boolean {
     return false;
   }
 
-  if (Symbol.toStringTag in value && Symbol.iterator in value) {
+  if (Symbol.iterator in value) {
     return false;
+  }
+
+  if (Symbol.toStringTag in value) {
+    return Object.prototype.toString.call(value) === "[object Module]";
   }
 
   return true;
