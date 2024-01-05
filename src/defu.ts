@@ -1,3 +1,4 @@
+import { isPlainObject } from "./_utils";
 import type { Merger, DefuFn as DefuFunction, DefuInstance } from "./types";
 
 // Base function to apply defaults
@@ -7,7 +8,7 @@ function _defu<T>(
   namespace = ".",
   merger?: Merger,
 ): T {
-  if (!_isPlainObject(defaults)) {
+  if (!isPlainObject(defaults)) {
     return _defu(baseObject, {}, namespace, merger);
   }
   const object = Object.assign({}, defaults);
@@ -29,7 +30,7 @@ function _defu<T>(
 
     if (Array.isArray(value) && Array.isArray(object[key])) {
       object[key] = [...value, ...object[key]];
-    } else if (_isPlainObject(value) && _isPlainObject(object[key])) {
+    } else if (isPlainObject(value) && isPlainObject(object[key])) {
       object[key] = _defu(
         value,
         object[key],
@@ -42,22 +43,6 @@ function _defu<T>(
   }
 
   return object;
-}
-
-// From sindresorhus/is-plain-obj
-// MIT License
-// Copyright (c) Sindre Sorhus <sindresorhus@gmail.com> (https://sindresorhus.com)
-function _isPlainObject(value: unknown): boolean {
-  if (value === null || typeof value !== "object") {
-    return false;
-  }
-  const prototype = Object.getPrototypeOf(value);
-  return (
-    (prototype === null ||
-      prototype === Object.prototype ||
-      Object.getPrototypeOf(prototype) === null) &&
-    (!(Symbol.toStringTag in value) || !(Symbol.iterator in value))
-  );
 }
 
 // Create defu wrapper with optional merger and multi arg support

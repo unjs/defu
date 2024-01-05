@@ -29,8 +29,8 @@ export type MergeObjects<
             ? nullish
             : Defaults[Key]
           : Defaults[Key] extends nullish
-          ? Destination[Key]
-          : Merge<Destination[Key], Defaults[Key]>; // eslint-disable-line no-use-before-define
+            ? Destination[Key]
+            : Merge<Destination[Key], Defaults[Key]>; // eslint-disable-line no-use-before-define
       };
 
 export type Defu<
@@ -42,10 +42,10 @@ export type Defu<
       ? Defu<MergeObjects<S, F>, Rest>
       : MergeObjects<S, F>
     : F extends IgnoredInput
-    ? Rest extends Array<Input | IgnoredInput>
-      ? Defu<S, Rest>
+      ? Rest extends Array<Input | IgnoredInput>
+        ? Defu<S, Rest>
+        : S
       : S
-    : S
   : S;
 
 export type DefuFn = <
@@ -81,31 +81,31 @@ export type Merge<Destination extends Input, Defaults extends Input> =
       ? nullish
       : Defaults
     : Defaults extends nullish
-    ? Destination
-    : // Handle arrays
-    Destination extends Array<any>
-    ? Defaults extends Array<any>
-      ? MergeArrays<Destination, Defaults>
-      : Destination | Defaults
-    : // Don't attempt to merge Functions, RegExps, Promises
-    // eslint-disable-next-line @typescript-eslint/ban-types
-    Destination extends Function
-    ? Destination | Defaults
-    : Destination extends RegExp
-    ? Destination | Defaults
-    : Destination extends Promise<any>
-    ? Destination | Defaults
-    : // Don't attempt to merge Functions, RegExps, Promises
-    // eslint-disable-next-line @typescript-eslint/ban-types
-    Defaults extends Function
-    ? Destination | Defaults
-    : Defaults extends RegExp
-    ? Destination | Defaults
-    : Defaults extends Promise<any>
-    ? Destination | Defaults
-    : // Ensure we only merge Records
-    Destination extends Input
-    ? Defaults extends Input
-      ? MergeObjects<Destination, Defaults>
-      : Destination | Defaults
-    : Destination | Defaults;
+      ? Destination
+      : // Handle arrays
+        Destination extends Array<any>
+        ? Defaults extends Array<any>
+          ? MergeArrays<Destination, Defaults>
+          : Destination | Defaults
+        : // Don't attempt to merge Functions, RegExps, Promises
+          // eslint-disable-next-line @typescript-eslint/ban-types
+          Destination extends Function
+          ? Destination | Defaults
+          : Destination extends RegExp
+            ? Destination | Defaults
+            : Destination extends Promise<any>
+              ? Destination | Defaults
+              : // Don't attempt to merge Functions, RegExps, Promises
+                // eslint-disable-next-line @typescript-eslint/ban-types
+                Defaults extends Function
+                ? Destination | Defaults
+                : Defaults extends RegExp
+                  ? Destination | Defaults
+                  : Defaults extends Promise<any>
+                    ? Destination | Defaults
+                    : // Ensure we only merge Records
+                      Destination extends Input
+                      ? Defaults extends Input
+                        ? MergeObjects<Destination, Defaults>
+                        : Destination | Defaults
+                      : Destination | Defaults;

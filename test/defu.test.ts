@@ -60,11 +60,10 @@ describe("defu", () => {
     expect(result).toEqual({ test: new Test("a") });
   });
 
-  it("should not merge dates but override", () => {
+  it("should assign date properly", () => {
     const date1 = new Date("2020-01-01");
     const date2 = new Date("2020-01-02");
     const result = defu({ date: date1 }, { date: date2 });
-    // Ensure to override, not merge
     expect(result).toEqual({ date: date1 });
   });
 
