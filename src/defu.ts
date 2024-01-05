@@ -11,6 +11,7 @@ function _defu<T>(
   if (!isPlainObject(defaults)) {
     return _defu(baseObject, {}, namespace, merger);
   }
+
   const object = Object.assign({}, defaults);
 
   for (const key in baseObject) {
