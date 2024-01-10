@@ -56,6 +56,24 @@ export type DefuFn = <
   ...defaults: Defaults
 ) => Defu<Source, Defaults>;
 
+export type DefuFnSchema = <
+  Source extends Input,
+  Defaults extends Array<Input | IgnoredInput>,
+>(
+  source: Source,
+  ...defaults: Defaults
+) => Defaults extends [infer F, ...infer Rest]
+  ? F extends Input
+    ? Rest extends Array<Input | IgnoredInput>
+      ? Defu<MergeObjects<F, F>, Rest>
+      : MergeObjects<F, F>
+    : F extends IgnoredInput
+      ? Rest extends Array<Input | IgnoredInput>
+        ? Defu<F, Rest>
+        : F
+      : F
+  : never;
+
 export interface DefuInstance {
   <Source extends Input, Defaults extends Array<Input | IgnoredInput>>(
     source: Source | IgnoredInput,

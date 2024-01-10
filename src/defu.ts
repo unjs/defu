@@ -1,5 +1,10 @@
 import { isPlainObject } from "./_utils";
-import type { Merger, DefuFn as DefuFunction, DefuInstance } from "./types";
+import type {
+  Merger,
+  DefuFn as DefuFunction,
+  DefuInstance,
+  DefuFnSchema,
+} from "./types";
 
 // Base function to apply defaults
 function _defu<T>(
@@ -72,5 +77,10 @@ export const defuArrayFn = createDefu((object, key, currentValue) => {
     return true;
   }
 });
+
+// Custom version for skipping keys not present in defaults
+export const defuSchema = createDefu((schema, key) => {
+  return !(key in schema);
+}) as DefuFnSchema;
 
 export type { Defu } from "./types";

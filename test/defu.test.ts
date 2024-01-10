@@ -1,6 +1,6 @@
 import { expectTypeOf } from "expect-type";
 import { it, describe, expect } from "vitest";
-import { defu, createDefu, defuFn, defuArrayFn } from "../src/defu";
+import { defu, createDefu, defuFn, defuArrayFn, defuSchema } from "../src/defu";
 import * as asteriskImport from "./fixtures/";
 
 // Part of tests brought from jonschlinkert/defaults-deep (MIT)
@@ -21,6 +21,25 @@ describe("defu", () => {
     const result2 = defu({ a: "c" }, { a: null as null, d: "c" });
     expect(result2).toEqual({ a: "c", d: "c" });
     expectTypeOf(result2).toMatchTypeOf<{ a: string; d: string }>();
+  });
+
+  it("defuSchema(): should skip keys non present in default object", () => {
+    const result = defuSchema(
+      { a: 1, b: 2, c: 3, d: 4 },
+      { a: 2, c: 4, d: 6, e: 8 },
+    );
+    expect(result).toEqual({
+      a: 1,
+      c: 3,
+      d: 4,
+      e: 8,
+    });
+    expectTypeOf(result).toEqualTypeOf<{
+      a: number;
+      c: number;
+      d: number;
+      e: number;
+    }>();
   });
 
   it("should copy nested values", () => {

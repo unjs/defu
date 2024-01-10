@@ -130,6 +130,19 @@ defuArrayFn({
 
 **Note:** the function is called only if the value defined in defaults is an aray.
 
+## Schema object
+You can use `defuSchema` if you want to remove keys that are not present in the default object.
+
+```js
+console.log(
+  defuSchema(
+      { a: 1, b: 2, c: 3, d: 4 },
+      { a: 2, c: 4, d: 6, e: 8 }
+  )
+);
+// => { a: 1, c: 3, d: 4, e: 8 }
+``
+
 ### Remarks
 
 - `object` and `defaults` are not modified
