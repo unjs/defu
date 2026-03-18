@@ -43,6 +43,32 @@ function _defu<T>(
     }
   }
 
+  // Also iterate Symbol keys — for...in skips them but Object.assign copies them
+  for (const key of Object.getOwnPropertySymbols(baseObject)) {
+    const value = (baseObject as any)[key];
+
+    if (value === null || value === undefined) {
+      continue;
+    }
+
+    if (merger && merger(object, key, value, namespace)) {
+      continue;
+    }
+
+    if (Array.isArray(value) && Array.isArray((object as any)[key])) {
+      (object as any)[key] = [...value, ...(object as any)[key]];
+    } else if (isPlainObject(value) && isPlainObject((object as any)[key])) {
+      (object as any)[key] = _defu(
+        value,
+        (object as any)[key],
+        (namespace ? `${namespace}.` : "") + key.toString(),
+        merger,
+      );
+    } else {
+      (object as any)[key] = value;
+    }
+  }
+
   return object;
 }
 
