@@ -43,6 +43,32 @@ function _defu<T>(
     }
   }
 
+  // Also merge Symbol keys (for...in does not iterate over Symbols)
+  for (const sym of Object.getOwnPropertySymbols(baseObject)) {
+    const value = (baseObject as any)[sym];
+
+    if (value === null || value === undefined) {
+      continue;
+    }
+
+    if (merger && merger(object, sym as any, value, namespace)) {
+      continue;
+    }
+
+    if (Array.isArray(value) && Array.isArray((object as any)[sym])) {
+      (object as any)[sym] = [...value, ...(object as any)[sym]];
+    } else if (isPlainObject(value) && isPlainObject((object as any)[sym])) {
+      (object as any)[sym] = _defu(
+        value,
+        (object as any)[sym],
+        (namespace ? `${namespace}.` : "") + sym.toString(),
+        merger,
+      );
+    } else {
+      (object as any)[sym] = value;
+    }
+  }
+
   return object;
 }
 
