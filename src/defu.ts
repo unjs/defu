@@ -44,7 +44,10 @@ function _defu<T>(
   }
 
   // Also merge Symbol keys (for...in does not iterate over Symbols)
-  for (const sym of Object.getOwnPropertySymbols(baseObject)) {
+  // Only process enumerable Symbols to match for...in behavior for string keys
+  for (const sym of Object.getOwnPropertySymbols(baseObject).filter(
+    (s) => Object.prototype.propertyIsEnumerable.call(baseObject, s),
+  )) {
     const value = (baseObject as any)[sym];
 
     if (value === null || value === undefined) {
