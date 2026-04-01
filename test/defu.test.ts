@@ -116,6 +116,25 @@ describe("defu", () => {
     expect({}.isAdmin).toBe(undefined);
   });
 
+  it("should ignore inherited enumerable properties", () => {
+    Object.defineProperty(Object.prototype, "pollutedEnum", {
+      value: 123,
+      enumerable: true,
+      configurable: true,
+      writable: true,
+    });
+
+    try {
+      const result = defu({ nested: {} }, { nested: {} });
+
+      expect(result).toEqual({ nested: {} });
+      expect(Object.keys(result)).toEqual(["nested"]);
+      expect(Object.keys(result.nested)).toEqual([]);
+    } finally {
+      delete (Object.prototype as Record<string, unknown>)["pollutedEnum"];
+    }
+  });
+
   it("should ignore non-object arguments", () => {
     expect(defu(null, { foo: 1 }, false, 123, { bar: 2 })).toEqual({
       foo: 1,

@@ -9,12 +9,12 @@ function _defu<T>(baseObject: T, defaults: any, namespace = ".", merger?: Merger
 
   const object = { ...defaults };
 
-  for (const key in baseObject) {
+  for (const key of Object.keys(baseObject as Record<string, any>)) {
     if (key === "__proto__" || key === "constructor") {
       continue;
     }
 
-    const value = baseObject[key];
+    const value = (baseObject as Record<string, any>)[key];
 
     if (value === null || value === undefined) {
       continue;
