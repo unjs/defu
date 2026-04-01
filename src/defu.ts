@@ -7,7 +7,7 @@ function _defu<T>(baseObject: T, defaults: any, namespace = ".", merger?: Merger
     return _defu(baseObject, {}, namespace, merger);
   }
 
-  const object = Object.assign({}, defaults);
+  const object = { ...defaults };
 
   for (const key in baseObject) {
     if (key === "__proto__" || key === "constructor") {

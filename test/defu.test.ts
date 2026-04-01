@@ -106,6 +106,12 @@ describe("defu", () => {
     defu({}, payload);
     defu(payload, {});
     defu(payload, payload);
+
+    const malicious = JSON.parse('{"__proto__":{"isAdmin":true}}');
+    const result = defu(malicious, { isAdmin: false });
+
+    expect(result.isAdmin).toBe(false);
+
     // @ts-ignore
     expect({}.isAdmin).toBe(undefined);
   });
