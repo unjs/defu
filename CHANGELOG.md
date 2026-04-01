@@ -2,6 +2,34 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## v6.1.5
+
+[compare changes](https://github.com/unjs/defu/compare/v6.1.4...v6.1.5)
+
+### 🩹 Fixes
+
+- Prevent prototype pollution via `__proto__` in defaults ([#156](https://github.com/unjs/defu/pull/156))
+- Ignore inherited enumerable properties ([11ba022](https://github.com/unjs/defu/commit/11ba022))
+
+### 🏡 Chore
+
+- Add tea.yaml ([70cffe5](https://github.com/unjs/defu/commit/70cffe5))
+- Update repo ([23cc432](https://github.com/unjs/defu/commit/23cc432))
+- Fix typecheck ([89df6bb](https://github.com/unjs/defu/commit/89df6bb))
+
+### ✅ Tests
+
+- Add more tests for plain objects ([b65f603](https://github.com/unjs/defu/commit/b65f603))
+
+### 🤖 CI
+
+- Bump node ([9237d9c](https://github.com/unjs/defu/commit/9237d9c))
+
+### ❤️ Contributors
+
+- Pooya Parsa ([@pi0](https://github.com/pi0))
+- Kricsleo ([@kricsleo](https://github.com/kricsleo))
+
 ## v6.1.4
 
 [compare changes](https://github.com/unjs/defu/compare/v6.1.3...v6.1.4)
