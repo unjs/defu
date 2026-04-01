@@ -108,19 +108,19 @@ defuFn(
 **Example:** Filter some items from defaults (array) and add 20 to the count default value.
 
 ```js
-import { defuArrayFn } from 'defu'
+import { defuArrayFn } from "defu";
 
-defuArrayFn({
-  ignore: (val) => val.filter(i => i !== 'dist'),
-  count: () => 20
- }, {
-   ignore: [
-     'node_modules',
-     'dist'
-   ],
-   count: 10
- })
- /*
+defuArrayFn(
+  {
+    ignore: (val) => val.filter((i) => i !== "dist"),
+    count: () => 20,
+  },
+  {
+    ignore: ["node_modules", "dist"],
+    count: 10,
+  },
+);
+/*
   {
     ignore: ['node_modules'],
     count: () => 20

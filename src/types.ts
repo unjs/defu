@@ -1,11 +1,5 @@
 export type Input = Record<string | number | symbol, any>;
-export type IgnoredInput =
-  | boolean
-  | number
-  | null
-  | any[]
-  | Record<never, any>
-  | undefined;
+export type IgnoredInput = boolean | number | null | any[] | Record<never, any> | undefined;
 
 export type Merger = <T extends Input, K extends keyof T>(
   object: T,
@@ -23,8 +17,7 @@ export type MergeObjects<
   ? Destination
   : Omit<Destination, keyof Destination & keyof Defaults> &
       Omit<Defaults, keyof Destination & keyof Defaults> & {
-        -readonly [Key in keyof Destination &
-          keyof Defaults]: Destination[Key] extends nullish
+        -readonly [Key in keyof Destination & keyof Defaults]: Destination[Key] extends nullish
           ? Defaults[Key] extends nullish
             ? nullish
             : Defaults[Key]
@@ -33,10 +26,10 @@ export type MergeObjects<
             : Merge<Destination[Key], Defaults[Key]>; // eslint-disable-line no-use-before-define
       };
 
-export type Defu<
-  S extends Input,
-  D extends Array<Input | IgnoredInput>,
-> = D extends [infer F, ...infer Rest]
+export type Defu<S extends Input, D extends Array<Input | IgnoredInput>> = D extends [
+  infer F,
+  ...infer Rest,
+]
   ? F extends Input
     ? Rest extends Array<Input | IgnoredInput>
       ? Defu<MergeObjects<S, F>, Rest>
@@ -48,10 +41,7 @@ export type Defu<
       : S
   : S;
 
-export type DefuFn = <
-  Source extends Input,
-  Defaults extends Array<Input | IgnoredInput>,
->(
+export type DefuFn = <Source extends Input, Defaults extends Array<Input | IgnoredInput>>(
   source: Source,
   ...defaults: Defaults
 ) => Defu<Source, Defaults>;
@@ -66,13 +56,12 @@ export interface DefuInstance {
   extend(merger?: Merger): DefuFn;
 }
 
-export type MergeArrays<Destination, Source> = Destination extends Array<
-  infer DestinationType
->
-  ? Source extends Array<infer SourceType>
-    ? Array<DestinationType | SourceType>
-    : Source | Array<DestinationType>
-  : Source | Destination;
+export type MergeArrays<Destination, Source> =
+  Destination extends Array<infer DestinationType>
+    ? Source extends Array<infer SourceType>
+      ? Array<DestinationType | SourceType>
+      : Source | Array<DestinationType>
+    : Source | Destination;
 
 export type Merge<Destination extends Input, Defaults extends Input> =
   // Remove explicitly null types
