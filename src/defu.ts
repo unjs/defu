@@ -68,4 +68,4 @@ export const defuArrayFn = createDefu((object, key, currentValue) => {
   }
 });
 
-export type { Defu } from "./types";
+export type { Defu, DefuFn, DefuInstance } from "./types";
