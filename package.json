@@ -24,8 +24,8 @@
     "lint": "oxlint src && oxfmt --check src test",
     "lint:fix": "oxlint src --fix && oxfmt src test",
     "prepack": "pnpm build",
-    "release": "pnpm test && changelogen --release && git push --follow-tags && pnpm publish",
-    "test": "pnpm lint && pnpm vitest run",
+    "release": "pnpm test && pnpm build && changelogen --release && git push --follow-tags && pnpm publish",
+    "test": "pnpm lint && pnpm test:types && pnpm vitest run",
     "test:types": "tsgo --noEmit"
   },
   "devDependencies": {
