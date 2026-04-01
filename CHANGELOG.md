@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## v6.1.6
+
+[compare changes](https://github.com/unjs/defu/compare/v6.1.5...v6.1.6)
+
+### 📦 Build
+
+- Fix mixed types ([407b516](https://github.com/unjs/defu/commit/407b516))
+
+### ❤️ Contributors
+
+- Pooya Parsa ([@pi0](https://github.com/pi0))
+
 ## v6.1.5
 
 [compare changes](https://github.com/unjs/defu/compare/v6.1.4...v6.1.5)
