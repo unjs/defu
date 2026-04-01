@@ -53,9 +53,7 @@ describe("defu", () => {
     const result = defu({ items: [item1] }, { items: [item2] });
     expect(result).toEqual({ items: [item1, item2] });
     expectTypeOf(result).toMatchTypeOf<{
-      items: Array<
-        { name: string; age: number } | { name: string; age: string }
-      >;
+      items: Array<{ name: string; age: number } | { name: string; age: string }>;
     }>();
   });
 
@@ -112,9 +110,7 @@ describe("defu", () => {
   });
 
   it("should not override Object prototype", () => {
-    const payload = JSON.parse(
-      '{"constructor": {"prototype": {"isAdmin": true}}}',
-    );
+    const payload = JSON.parse('{"constructor": {"prototype": {"isAdmin": true}}}');
     defu({}, payload);
     defu(payload, {});
     defu(payload, payload);

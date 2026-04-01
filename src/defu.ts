@@ -2,12 +2,7 @@ import { isPlainObject } from "./_utils";
 import type { Merger, DefuFn as DefuFunction, DefuInstance } from "./types";
 
 // Base function to apply defaults
-function _defu<T>(
-  baseObject: T,
-  defaults: any,
-  namespace = ".",
-  merger?: Merger,
-): T {
+function _defu<T>(baseObject: T, defaults: any, namespace = ".", merger?: Merger): T {
   if (!isPlainObject(defaults)) {
     return _defu(baseObject, {}, namespace, merger);
   }
