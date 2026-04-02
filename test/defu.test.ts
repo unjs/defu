@@ -114,8 +114,33 @@ describe("defu", () => {
     defu({}, payload);
     defu(payload, {});
     defu(payload, payload);
+
+    const malicious = JSON.parse('{"__proto__":{"isAdmin":true}}');
+    const result = defu(malicious, { isAdmin: false });
+
+    expect(result.isAdmin).toBe(false);
+
     // @ts-ignore
     expect({}.isAdmin).toBe(undefined);
+  });
+
+  it("should ignore inherited enumerable properties", () => {
+    Object.defineProperty(Object.prototype, "pollutedEnum", {
+      value: 123,
+      enumerable: true,
+      configurable: true,
+      writable: true,
+    });
+
+    try {
+      const result = defu({ nested: {} }, { nested: {} });
+
+      expect(result).toEqual({ nested: {} });
+      expect(Object.keys(result)).toEqual(["nested"]);
+      expect(Object.keys(result.nested)).toEqual([]);
+    } finally {
+      delete (Object.prototype as Record<string, unknown>)["pollutedEnum"];
+    }
   });
 
   it("should ignore non-object arguments", () => {

@@ -7,7 +7,7 @@ function _defu<T>(baseObject: T, defaults: any, namespace = ".", merger?: Merger
     return _defu(baseObject, {}, namespace, merger);
   }
 
-  const object = Object.assign({}, defaults);
+  const object = { ...defaults };
 
   const merge = (key: keyof T) => {
     if (key === "__proto__" || key === "constructor") {
@@ -38,10 +38,9 @@ function _defu<T>(baseObject: T, defaults: any, namespace = ".", merger?: Merger
     }
   };
 
-  // Iterates over all enumerable string-keyed properties
-  // of the base object and its prototype chain
-  for (const key in baseObject) {
-    merge(key);
+  // Iterates over all own enumerable string-keyed properties
+  for (const key of Object.keys(baseObject as Record<string, any>)) {
+    merge(key as keyof T);
   }
 
   // Iterates over all enumerable symbol properties of the base object
@@ -83,4 +82,4 @@ export const defuArrayFn = createDefu((object, key, currentValue) => {
   }
 });
 
-export type { Defu } from "./types";
+export type { Defu, DefuFn, DefuInstance } from "./types";

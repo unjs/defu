@@ -1,6 +1,6 @@
 {
   "name": "defu",
-  "version": "6.1.4",
+  "version": "6.1.6",
   "description": "Recursively assign default properties. Lightweight and Fast!",
   "license": "MIT",
   "repository": "unjs/defu",
@@ -10,12 +10,17 @@
   ],
   "main": "./lib/defu.cjs",
   "module": "./dist/defu.mjs",
-  "types": "./dist/defu.d.ts",
+  "types": "./lib/defu.d.cts",
   "exports": {
     ".": {
-      "types": "./dist/defu.d.ts",
-      "import": "./dist/defu.mjs",
-      "require": "./lib/defu.cjs"
+      "import": {
+        "types": "./dist/defu.d.mts",
+        "default": "./dist/defu.mjs"
+      },
+      "require": {
+        "types": "./lib/defu.d.cts",
+        "default": "./lib/defu.cjs"
+      }
     }
   },
   "scripts": {
