@@ -10,3 +10,5 @@ declare const defuProxy: DefuInstance & {
 };
 
 export = defuProxy;
+
+export type { Defu, DefuFn, DefuInstance }
