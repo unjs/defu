@@ -34,8 +34,8 @@
     "test:types": "tsgo --noEmit"
   },
   "devDependencies": {
-    "@types/node": "^25.5.0",
-    "@typescript/native-preview": "7.0.0-dev.20260401.1",
+    "@types/node": "^25.5.2",
+    "@typescript/native-preview": "7.0.0-dev.20260405.1",
     "@vitest/coverage-v8": "^4.1.2",
     "changelogen": "^0.6.2",
     "eslint-config-unjs": "^0.6.2",
