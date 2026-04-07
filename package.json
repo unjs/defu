@@ -10,7 +10,7 @@
   ],
   "main": "./lib/defu.cjs",
   "module": "./dist/defu.mjs",
-  "types": "./lib/defu.d.cts",
+  "types": "./dist/defu.d.ts",
   "exports": {
     ".": {
       "import": {
