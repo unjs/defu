@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## v6.1.7
+
+[compare changes](https://github.com/unjs/defu/compare/v6.1.6...v6.1.7)
+
+### 🩹 Fixes
+
+- **defu.d.cts:** Export Defu types ([#157](https://github.com/unjs/defu/pull/157))
+
+### 📦 Build
+
+- Correct the `types` export entry ([#160](https://github.com/unjs/defu/pull/160))
+
+### ❤️ Contributors
+
+- Jakub Michálek ([@J-Michalek](https://github.com/J-Michalek))
+- Kricsleo ([@kricsleo](https://github.com/kricsleo))
+
 ## v6.1.6
 
 [compare changes](https://github.com/unjs/defu/compare/v6.1.5...v6.1.6)
