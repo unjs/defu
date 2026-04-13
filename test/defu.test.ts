@@ -236,6 +236,30 @@ describe("defu", () => {
     });
   });
 
+  it("merges symbol keys", () => {
+    const a = Symbol("a");
+    const b = Symbol("b");
+    const c = Symbol("c");
+    const result = defu({ [a]: "a", [c]: ["a", "b"] }, { [a]: "bbb", [b]: "c", [c]: ["c", "d"] });
+    expect(result).toEqual({
+      [a]: "a",
+      [b]: "c",
+      [c]: ["a", "b", "c", "d"],
+    });
+  });
+
+  it("preserves symbol keys from defaults", () => {
+    const s = Symbol("key");
+    const result = defu({}, { [s]: "default" });
+    expect(result[s]).toBe("default");
+  });
+
+  it("overrides symbol keys from base", () => {
+    const s = Symbol("key");
+    const result = defu({ [s]: "override" }, { [s]: "default" });
+    expect(result[s]).toBe("override");
+  });
+
   it("custom merger with namespace", () => {
     const ext = createDefu((obj, key, val, namespace) => {
       // console.log({ obj, key, val, namespace })
