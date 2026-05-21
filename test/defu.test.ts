@@ -271,4 +271,27 @@ describe("defu", () => {
       },
     });
   });
+
+  it("should ignore Symbol keys on baseObject but preserve them on defaults", () => {
+    const sym = Symbol("test");
+    const result = defu({ [sym]: "a" }, { [sym]: "b", x: 1 });
+    expect(Object.keys(result)).toEqual(["x"]);
+    expect((result as Record<symbol, unknown>)[sym]).toBe("b");
+  });
+
+  it("should merge null-prototype objects like plain objects", () => {
+    const defaults = Object.create(null);
+    defaults.a = 1;
+    defaults.b = { c: 2 };
+    const result = defu({ b: { d: 3 } }, defaults);
+    expect(result).toEqual({ a: 1, b: { c: 2, d: 3 } });
+  });
+
+  it("should convert sparse array holes into undefined when merging arrays", () => {
+    const sparse = [1, , 3];
+    const result = defu({ arr: sparse }, { arr: [4, 5] });
+    expect(result).toEqual({ arr: [1, undefined, 3, 4, 5] });
+    expect(result.arr.length).toBe(5);
+    expect(Object.hasOwn(result.arr, 1)).toBe(true);
+  });
 });
