@@ -31,6 +31,14 @@ describe("defu", () => {
     expectTypeOf(result).toMatchTypeOf<{ a: { b: string; d: string } }>();
   });
 
+  it("should copy Symbol properties", () => {
+    const a = Symbol("a");
+    const b = Symbol("b");
+    const result = defu({ [a]: "a" }, { [b]: "b" });
+    expect(result).toEqual({ [a]: "a", [b]: "b" });
+    expectTypeOf(result).toMatchTypeOf<{ [k: symbol]: string }>();
+  });
+
   it("should concat array values by default", () => {
     const result = defu({ array: ["a", "b"] }, { array: ["c", "d"] });
     expect(result).toEqual({

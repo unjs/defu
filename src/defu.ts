@@ -9,19 +9,19 @@ function _defu<T>(baseObject: T, defaults: any, namespace = ".", merger?: Merger
 
   const object = { ...defaults };
 
-  for (const key of Object.keys(baseObject as Record<string, any>)) {
+  const merge = (key: keyof T) => {
     if (key === "__proto__" || key === "constructor") {
-      continue;
+      return;
     }
 
-    const value = (baseObject as Record<string, any>)[key];
+    const value = baseObject[key];
 
     if (value === null || value === undefined) {
-      continue;
+      return;
     }
 
     if (merger && merger(object, key, value, namespace)) {
-      continue;
+      return;
     }
 
     if (Array.isArray(value) && Array.isArray(object[key])) {
@@ -36,6 +36,20 @@ function _defu<T>(baseObject: T, defaults: any, namespace = ".", merger?: Merger
     } else {
       object[key] = value;
     }
+  };
+
+  // Iterates over all own enumerable string-keyed properties
+  for (const key of Object.keys(baseObject as Record<string, any>)) {
+    merge(key as keyof T);
+  }
+
+  // Iterates over all enumerable symbol properties of the base object
+  for (const key of Object.getOwnPropertySymbols(baseObject)) {
+    if (!Object.prototype.propertyIsEnumerable.call(baseObject, key)) {
+      continue;
+    }
+
+    merge(key as keyof T);
   }
 
   return object;
