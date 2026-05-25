@@ -1,10 +1,42 @@
 import { isPlainObject } from "./_utils";
-import type { Merger, DefuFn as DefuFunction, DefuInstance } from "./types";
+import type { DefuOptions, Merger, DefuFn as DefuFunction, DefuInstance } from "./types";
+
+function isDefuOptions(value: unknown): value is DefuOptions {
+  if (!isPlainObject(value)) {
+    return false;
+  }
+
+  const object = value as Record<string, unknown>;
+  const keys = Object.keys(object);
+
+  return keys.length > 0 && keys.every((key) => key === "skipNullish");
+}
+
+function splitDefuArgs(arguments_: unknown[]) {
+  const args = [...arguments_];
+  let options: DefuOptions = {};
+
+  const last = args[args.length - 1];
+  if (isDefuOptions(last)) {
+    options = last;
+    args.pop();
+  }
+
+  return { args, options };
+}
 
 // Base function to apply defaults
-function _defu<T>(baseObject: T, defaults: any, namespace = ".", merger?: Merger): T {
+function _defu<T>(
+  baseObject: T,
+  defaults: any,
+  namespace = ".",
+  merger?: Merger,
+  options: DefuOptions = {},
+): T {
+  const skipNullish = options.skipNullish !== false;
+
   if (!isPlainObject(defaults)) {
-    return _defu(baseObject, {}, namespace, merger);
+    return _defu(baseObject, {}, namespace, merger, options);
   }
 
   const object = { ...defaults };
@@ -16,7 +48,12 @@ function _defu<T>(baseObject: T, defaults: any, namespace = ".", merger?: Merger
 
     const value = (baseObject as Record<string, any>)[key];
 
-    if (value === null || value === undefined) {
+    if (skipNullish && (value === null || value === undefined)) {
+      continue;
+    }
+
+    if (!skipNullish && (value === null || value === undefined)) {
+      object[key] = value;
       continue;
     }
 
@@ -32,6 +69,7 @@ function _defu<T>(baseObject: T, defaults: any, namespace = ".", merger?: Merger
         object[key],
         (namespace ? `${namespace}.` : "") + key.toString(),
         merger,
+        options,
       );
     } else {
       object[key] = value;
@@ -43,9 +81,25 @@ function _defu<T>(baseObject: T, defaults: any, namespace = ".", merger?: Merger
 
 // Create defu wrapper with optional merger and multi arg support
 export function createDefu(merger?: Merger): DefuFunction {
-  return (...arguments_) =>
+  return (...arguments_) => {
+    const { args, options } = splitDefuArgs(arguments_);
+
+    if (merger && args.length > 1 && isPlainObject(args[0])) {
+      const [source, ...defaults] = args;
+
+      return _defu(
+        source,
+        // eslint-disable-next-line unicorn/no-array-reduce
+        defaults.reduce((p, c) => _defu(p, c, "", merger, options), {} as any),
+        "",
+        merger,
+        options,
+      ) as any;
+    }
+
     // eslint-disable-next-line unicorn/no-array-reduce
-    arguments_.reduce((p, c) => _defu(p, c, "", merger), {} as any);
+    return args.reduce((p, c) => _defu(p, c, "", merger, options), {} as any);
+  };
 }
 
 // Standard version
@@ -68,4 +122,4 @@ export const defuArrayFn = createDefu((object, key, currentValue) => {
   }
 });
 
-export type { Defu, DefuFn, DefuInstance } from "./types";
+export type { Defu, DefuFn, DefuInstance, DefuOptions } from "./types";

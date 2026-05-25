@@ -23,6 +23,19 @@ describe("defu", () => {
     expectTypeOf(result2).toMatchTypeOf<{ a: string; d: string }>();
   });
 
+  it("should preserve nullish values when skipNullish is false", () => {
+    expect(defu({ a: undefined, b: null }, { a: "c", b: "d" }, { skipNullish: false })).toEqual({
+      a: undefined,
+      b: null,
+    });
+
+    expect(
+      defu({ nested: { a: undefined } }, { nested: { a: "c", b: "d" } }, { skipNullish: false }),
+    ).toEqual({
+      nested: { a: undefined, b: "d" },
+    });
+  });
+
   it("should copy nested values", () => {
     const result = defu({ a: { b: "c" } }, { a: { d: "e" } });
     expect(result).toEqual({
