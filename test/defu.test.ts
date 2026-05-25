@@ -23,6 +23,26 @@ describe("defu", () => {
     expectTypeOf(result2).toMatchTypeOf<{ a: string; d: string }>();
   });
 
+  it("calls onDuplicate when source overrides default with same value", () => {
+    const duplicates: Array<{ key: string; value: unknown; object: Record<string, unknown> }> = [];
+
+    const defuWithDuplicateHandler = createDefu({
+      onDuplicate(object, key, value) {
+        duplicates.push({ key, value, object });
+      },
+    });
+
+    defuWithDuplicateHandler(
+      { a: "c", nested: { b: 1 } },
+      { a: "c", nested: { b: 1, c: 2 }, d: "e" },
+    );
+
+    expect(duplicates).toEqual([
+      { key: "a", value: "c", object: { a: "c", nested: { b: 1, c: 2 }, d: "e" } },
+      { key: "b", value: 1, object: { b: 1, c: 2 } },
+    ]);
+  });
+
   it("should copy nested values", () => {
     const result = defu({ a: { b: "c" } }, { a: { d: "e" } });
     expect(result).toEqual({

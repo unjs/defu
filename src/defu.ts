@@ -1,10 +1,36 @@
 import { isPlainObject } from "./_utils";
-import type { Merger, DefuFn as DefuFunction, DefuInstance } from "./types";
+import type { DefuOptions, Merger, DefuFn as DefuFunction, DefuInstance } from "./types";
+
+function resolveCreateDefuArgs(mergerOrOptions?: Merger | DefuOptions) {
+  if (typeof mergerOrOptions === "function") {
+    return { merger: mergerOrOptions, options: {} as DefuOptions };
+  }
+
+  return { merger: undefined, options: mergerOrOptions ?? {} };
+}
+
+function notifyDuplicate(
+  options: DefuOptions,
+  key: string,
+  value: unknown,
+  defaults: Record<string, unknown>,
+  object: Record<string, unknown>,
+) {
+  if (options.onDuplicate && Object.hasOwn(defaults, key) && Object.is(object[key], value)) {
+    options.onDuplicate(object, key, value);
+  }
+}
 
 // Base function to apply defaults
-function _defu<T>(baseObject: T, defaults: any, namespace = ".", merger?: Merger): T {
+function _defu<T>(
+  baseObject: T,
+  defaults: any,
+  namespace = ".",
+  merger?: Merger,
+  options: DefuOptions = {},
+): T {
   if (!isPlainObject(defaults)) {
-    return _defu(baseObject, {}, namespace, merger);
+    return _defu(baseObject, {}, namespace, merger, options);
   }
 
   const object = { ...defaults };
@@ -32,8 +58,10 @@ function _defu<T>(baseObject: T, defaults: any, namespace = ".", merger?: Merger
         object[key],
         (namespace ? `${namespace}.` : "") + key.toString(),
         merger,
+        options,
       );
     } else {
+      notifyDuplicate(options, key, value, defaults, object);
       object[key] = value;
     }
   }
@@ -42,10 +70,12 @@ function _defu<T>(baseObject: T, defaults: any, namespace = ".", merger?: Merger
 }
 
 // Create defu wrapper with optional merger and multi arg support
-export function createDefu(merger?: Merger): DefuFunction {
+export function createDefu(mergerOrOptions?: Merger | DefuOptions): DefuFunction {
+  const { merger, options } = resolveCreateDefuArgs(mergerOrOptions);
+
   return (...arguments_) =>
     // eslint-disable-next-line unicorn/no-array-reduce
-    arguments_.reduce((p, c) => _defu(p, c, "", merger), {} as any);
+    arguments_.reduce((p, c) => _defu(p, c, "", merger, options), {} as any) as any;
 }
 
 // Standard version
@@ -68,4 +98,4 @@ export const defuArrayFn = createDefu((object, key, currentValue) => {
   }
 });
 
-export type { Defu, DefuFn, DefuInstance } from "./types";
+export type { Defu, DefuFn, DefuInstance, DefuOptions } from "./types";

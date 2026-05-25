@@ -1,6 +1,10 @@
 export type Input = Record<string | number | symbol, any>;
 export type IgnoredInput = boolean | number | null | any[] | Record<never, any> | undefined;
 
+export interface DefuOptions {
+  onDuplicate?: (object: Record<string, unknown>, key: string, value: unknown) => void;
+}
+
 export type Merger = <T extends Input, K extends keyof T>(
   object: T,
   key: keyof T,
