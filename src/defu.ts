@@ -43,9 +43,22 @@ function _defu<T>(baseObject: T, defaults: any, namespace = ".", merger?: Merger
 
 // Create defu wrapper with optional merger and multi arg support
 export function createDefu(merger?: Merger): DefuFunction {
-  return (...arguments_) =>
+  return (...arguments_) => {
+    if (merger && arguments_.length > 1 && isPlainObject(arguments_[0])) {
+      const [source, ...defaults] = arguments_;
+
+      return _defu(
+        source,
+        // eslint-disable-next-line unicorn/no-array-reduce
+        defaults.reduce((p, c) => _defu(p, c, "", merger), {} as any),
+        "",
+        merger,
+      ) as any;
+    }
+
     // eslint-disable-next-line unicorn/no-array-reduce
-    arguments_.reduce((p, c) => _defu(p, c, "", merger), {} as any);
+    return arguments_.reduce((p, c) => _defu(p, c, "", merger), {} as any);
+  };
 }
 
 // Standard version
