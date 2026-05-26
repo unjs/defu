@@ -1,6 +1,14 @@
 export type Input = Record<string | number | symbol, any>;
 export type IgnoredInput = boolean | number | null | any[] | Record<never, any> | undefined;
 
+export interface DefuOptions {
+  /**
+   * When set to `false`, `null` and `undefined` values from the source object
+   * are preserved instead of being skipped.
+   */
+  skipNullish?: boolean;
+}
+
 export type Merger = <T extends Input, K extends keyof T>(
   object: T,
   key: keyof T,
@@ -41,13 +49,16 @@ export type Defu<S extends Input, D extends Array<Input | IgnoredInput>> = D ext
       : S
   : S;
 
-export type DefuFn = <Source extends Input, Defaults extends Array<Input | IgnoredInput>>(
+export type DefuFn = <
+  Source extends Input,
+  Defaults extends Array<Input | IgnoredInput | DefuOptions>,
+>(
   source: Source,
   ...defaults: Defaults
 ) => Defu<Source, Defaults>;
 
 export interface DefuInstance {
-  <Source extends Input, Defaults extends Array<Input | IgnoredInput>>(
+  <Source extends Input, Defaults extends Array<Input | IgnoredInput | DefuOptions>>(
     source: Source | IgnoredInput,
     ...defaults: Defaults
   ): Defu<Source, Defaults>;
