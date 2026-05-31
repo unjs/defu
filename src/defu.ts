@@ -48,10 +48,6 @@ export function createDefu(merger?: Merger): DefuFunction {
     arguments_.reduce((p, c) => _defu(p, c, "", merger), {} as any);
 }
 
-// Standard version
-export const defu = createDefu() as DefuInstance;
-export default defu;
-
 // Custom version with function merge support
 export const defuFn = createDefu((object, key, currentValue) => {
   if (object[key] !== undefined && typeof currentValue === "function") {
@@ -67,5 +63,14 @@ export const defuArrayFn = createDefu((object, key, currentValue) => {
     return true;
   }
 });
+
+// Standard version with backward-compatible fn, arrayFn, extend properties
+export const defu = Object.assign(createDefu(), {
+  fn: defuFn,
+  arrayFn: defuArrayFn,
+  extend: createDefu,
+}) as DefuInstance;
+
+export default defu;
 
 export type { Defu, DefuFn, DefuInstance } from "./types";
