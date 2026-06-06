@@ -6,6 +6,7 @@ Assign default properties, recursively. Lightweight and Fast.
 [![npm downloads][npm-downloads-src]][npm-downloads-href]
 [![bundle][bundle-src]][bundle-href]
 [![Codecov][codecov-src]][codecov-href]
+[![Coverage][taskbounty-coverage-src]][taskbounty-coverage-href]
 [![License][license-src]][license-href]
 
 ## Install
@@ -165,6 +166,8 @@ MIT. Made with 💖
 [npm-downloads-href]: https://npmjs.com/package/defu
 [codecov-src]: https://img.shields.io/codecov/c/gh/unjs/defu/main?style=flat&colorA=18181B&colorB=F0DB4F
 [codecov-href]: https://codecov.io/gh/unjs/defu
+[taskbounty-coverage-src]: https://www.task-bounty.com/badge/coverage/unjs/defu.svg
+[taskbounty-coverage-href]: https://www.task-bounty.com/coverage-check/unjs/defu
 [bundle-src]: https://img.shields.io/bundlephobia/minzip/defu?style=flat&colorA=18181B&colorB=F0DB4F
 [bundle-href]: https://bundlephobia.com/result?p=defu
 [license-src]: https://img.shields.io/github/license/unjs/defu.svg?style=flat&colorA=18181B&colorB=F0DB4F
