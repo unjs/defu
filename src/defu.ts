@@ -53,19 +53,38 @@ export const defu = createDefu() as DefuInstance;
 export default defu;
 
 // Custom version with function merge support
-export const defuFn = createDefu((object, key, currentValue) => {
+const _defuFnMerger: Merger = (object, key, currentValue) => {
   if (object[key] !== undefined && typeof currentValue === "function") {
     object[key] = currentValue(object[key]);
     return true;
   }
-});
+};
 
 // Custom version with function merge support only for defined arrays
-export const defuArrayFn = createDefu((object, key, currentValue) => {
+const _defuArrayFnMerger: Merger = (object, key, currentValue) => {
   if (Array.isArray(object[key]) && typeof currentValue === "function") {
     object[key] = currentValue(object[key]);
     return true;
   }
-});
+};
+
+// With more than two arguments, functions from the first argument must be
+// applied to the fully-merged result of all subsequent defaults. Without
+// this, the function is consumed on the first match and subsequent defaults
+// can re-introduce values that the function was supposed to transform.
+function _createDefuWithFnMerger(merger: Merger): DefuFunction {
+  return (...arguments_) =>
+    _defu(
+      arguments_[0],
+      // eslint-disable-next-line unicorn/no-array-reduce
+      arguments_.slice(1).reduce((p, c) => _defu(p, c, "", merger), {} as any),
+      "",
+      merger,
+    ) as any;
+}
+
+export const defuFn = _createDefuWithFnMerger(_defuFnMerger) as DefuInstance;
+
+export const defuArrayFn = _createDefuWithFnMerger(_defuArrayFnMerger) as DefuInstance;
 
 export type { Defu, DefuFn, DefuInstance } from "./types";

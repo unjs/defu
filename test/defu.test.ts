@@ -216,6 +216,33 @@ describe("defu", () => {
     });
   });
 
+  it("defuFn() applies function to merged result of all defaults", () => {
+    const filterDist = (val: string[]) => val.filter((i) => i !== "dist");
+    const addTwenty = (val: number) => val + 20;
+    const addTen = (val: number) => val + 10;
+    expect(
+      defuFn(
+        {
+          count: addTwenty,
+          num: addTen,
+          items: filterDist,
+        },
+        {
+          count: 10,
+          num: 5,
+          items: ["node_modules", "test"],
+        },
+        {
+          items: ["temp", "dist"],
+        },
+      ),
+    ).toEqual({
+      count: 30,
+      num: 15,
+      items: ["node_modules", "test", "temp"],
+    });
+  });
+
   it("defuArrayFn()", () => {
     // eslint-disable-next-line unicorn/consistent-function-scoping
     const num = () => 20;
