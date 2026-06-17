@@ -38,6 +38,31 @@ function _defu<T>(baseObject: T, defaults: any, namespace = ".", merger?: Merger
     }
   }
 
+  for (const key of Object.getOwnPropertySymbols(baseObject)) {
+    const value = (baseObject as any)[key];
+
+    if (value === null || value === undefined) {
+      continue;
+    }
+
+    if (merger && merger(object, key, value, namespace)) {
+      continue;
+    }
+
+    if (Array.isArray(value) && Array.isArray(object[key])) {
+      object[key] = [...value, ...object[key]];
+    } else if (isPlainObject(value) && isPlainObject(object[key])) {
+      object[key] = _defu(
+        value,
+        object[key],
+        (namespace ? `${namespace}.` : "") + key.toString(),
+        merger,
+      );
+    } else {
+      object[key] = value;
+    }
+  }
+
   return object;
 }
 

@@ -271,4 +271,14 @@ describe("defu", () => {
       },
     });
   });
+
+  it("should handle symbol keys (#145)", () => {
+    const [a, b, c] = [Symbol("a"), Symbol("b"), Symbol("c")];
+    const result = defu({ [a]: "a", [c]: ["a", "b"] }, { [a]: "bbb", [b]: "c", [c]: ["c", "d"] });
+    expect(result).toEqual({
+      [a]: "a",
+      [b]: "c",
+      [c]: ["a", "b", "c", "d"],
+    });
+  });
 });
