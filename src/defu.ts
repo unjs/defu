@@ -1,4 +1,4 @@
-import { isPlainObject } from "./_utils";
+import { isPlainObject, getOwnEnumerableKeys } from "./_utils";
 import type { Merger, DefuFn as DefuFunction, DefuInstance } from "./types";
 
 // Base function to apply defaults
@@ -9,12 +9,15 @@ function _defu<T>(baseObject: T, defaults: any, namespace = ".", merger?: Merger
 
   const object = { ...defaults };
 
-  for (const key of Object.keys(baseObject as Record<string, any>)) {
+  // Iterate enumerable own keys including symbols, mirroring the `{ ...defaults }`
+  // spread above. `Object.keys` skips symbol keys, so they would otherwise be
+  // overwritten by `defaults` instead of merged. See unjs/defu#145.
+  for (const key of getOwnEnumerableKeys(baseObject as Record<string | symbol, any>)) {
     if (key === "__proto__" || key === "constructor") {
       continue;
     }
 
-    const value = (baseObject as Record<string, any>)[key];
+    const value = (baseObject as Record<string | symbol, any>)[key];
 
     if (value === null || value === undefined) {
       continue;

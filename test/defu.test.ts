@@ -135,6 +135,35 @@ describe("defu", () => {
     }
   });
 
+  it("should merge symbol keys", () => {
+    const a = Symbol("a");
+    const b = Symbol("b");
+    const c = Symbol("c");
+
+    const result = defu({ [a]: "a", [c]: ["a", "b"] }, { [a]: "bbb", [b]: "c", [c]: ["c", "d"] });
+
+    expect(result).toEqual({ [a]: "a", [b]: "c", [c]: ["a", "b", "c", "d"] });
+  });
+
+  it("should recursively merge nested symbol keys", () => {
+    const s = Symbol("s");
+
+    const result = defu({ nested: { [s]: { a: 1 } } }, { nested: { [s]: { b: 2 } } });
+
+    expect(result).toEqual({ nested: { [s]: { a: 1, b: 2 } } });
+  });
+
+  it("should ignore non-enumerable symbol keys", () => {
+    const s = Symbol("s");
+    const base = {};
+    Object.defineProperty(base, s, { value: "x", enumerable: false });
+
+    const result = defu(base, { foo: 1 });
+
+    expect(Object.getOwnPropertySymbols(result)).toEqual([]);
+    expect(result).toEqual({ foo: 1 });
+  });
+
   it("should ignore non-object arguments", () => {
     expect(defu(null, { foo: 1 }, false, 123, { bar: 2 })).toEqual({
       foo: 1,
