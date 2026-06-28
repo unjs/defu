@@ -128,7 +128,7 @@ defuArrayFn(
   */
 ```
 
-**Note:** the function is called only if the value defined in defaults is an aray.
+**Note:** the function is called only if the value defined in defaults is an array.
 
 ### Remarks
 
