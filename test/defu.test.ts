@@ -153,6 +153,21 @@ describe("defu", () => {
     expect(result).toEqual({ nested: { [s]: { a: 1, b: 2 } } });
   });
 
+  it("should merge symbol keys with a custom merger", () => {
+    const s = Symbol("s");
+    const customDefu = createDefu((object, key, value) => {
+      const record = object as Record<PropertyKey, unknown>;
+      if (key === s && typeof record[key] === "string") {
+        record[key] = `${value}:${record[key]}`;
+        return true;
+      }
+    });
+
+    const result = customDefu({ [s]: "base" }, { [s]: "default" });
+
+    expect(result).toEqual({ [s]: "base:default" });
+  });
+
   it("should ignore non-enumerable symbol keys", () => {
     const s = Symbol("s");
     const base = {};
