@@ -143,6 +143,12 @@ describe("defu", () => {
     expect(result).toEqual({ [a]: "a", [b]: "c", [c]: ["a", "b", "c", "d"] });
   });
 
+  it("should recursively merge symbol-keyed nested objects", () => {
+    const sym = Symbol("nested");
+    const result = defu({ [sym]: { x: 1 } }, { [sym]: { y: 2 } });
+    expect(result).toEqual({ [sym]: { x: 1, y: 2 } });
+  });
+
   it("should ignore non-enumerable symbol keys", () => {
     const hidden = Symbol("hidden");
     const base = {};
