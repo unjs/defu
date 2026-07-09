@@ -135,6 +135,22 @@ describe("defu", () => {
     }
   });
 
+  it("should merge symbol keys", () => {
+    const a = Symbol("a");
+    const b = Symbol("b");
+    const c = Symbol("c");
+    const result = defu({ [a]: "a", [c]: ["a", "b"] }, { [a]: "bbb", [b]: "c", [c]: ["c", "d"] });
+    expect(result).toEqual({ [a]: "a", [b]: "c", [c]: ["a", "b", "c", "d"] });
+  });
+
+  it("should ignore non-enumerable symbol keys", () => {
+    const hidden = Symbol("hidden");
+    const base = {};
+    Object.defineProperty(base, hidden, { value: 1, enumerable: false });
+    const result = defu(base, {});
+    expect(Object.getOwnPropertySymbols(result)).toEqual([]);
+  });
+
   it("should ignore non-object arguments", () => {
     expect(defu(null, { foo: 1 }, false, 123, { bar: 2 })).toEqual({
       foo: 1,
