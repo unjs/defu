@@ -45,7 +45,9 @@ function _defu<T>(baseObject: T, defaults: any, namespace = ".", merger?: Merger
 export function createDefu(merger?: Merger): DefuFunction {
   return (...arguments_) =>
     // eslint-disable-next-line unicorn/no-array-reduce
-    arguments_.reduce((p, c) => _defu(p, c, "", merger), {} as any);
+    arguments_
+      .filter((arg) => arg != null && isPlainObject(arg))
+      .reduce((p, c) => _defu(p, c, "", merger), {} as any);
 }
 
 // Standard version
