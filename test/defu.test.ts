@@ -142,6 +142,19 @@ describe("defu", () => {
     });
   });
 
+  it("should handle null and undefined arguments gracefully", () => {
+    expect(defu(null)).toEqual({});
+    expect(defu(undefined)).toEqual({});
+    expect(defu(null, null)).toEqual({});
+    expect(defu(undefined, undefined)).toEqual({});
+    expect(defu(null, undefined, { a: 1 })).toEqual({ a: 1 });
+    expect(defu({ a: 1 }, null, { b: 2 })).toEqual({ a: 1, b: 2 });
+    expect(defu(null, { a: 1 }, undefined, { b: 2 }, null)).toEqual({
+      a: 1,
+      b: 2,
+    });
+  });
+
   it("should merge types of more than two objects", () => {
     interface SomeConfig {
       foo: string;
