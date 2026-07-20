@@ -2,9 +2,9 @@ import { isPlainObject } from "./_utils";
 import type { Merger, DefuFn as DefuFunction, DefuInstance } from "./types";
 
 // Base function to apply defaults
-function _defu<T>(baseObject: T, defaults: any, namespace = ".", merger?: Merger): T {
+function _defu<T>(baseObject: T, defaults: any, namespace = ".", merger?: Merger, allowNullish = false): T {
   if (!isPlainObject(defaults)) {
-    return _defu(baseObject, {}, namespace, merger);
+    return _defu(baseObject, {}, namespace, merger, allowNullish);
   }
 
   const object = { ...defaults };
@@ -16,7 +16,7 @@ function _defu<T>(baseObject: T, defaults: any, namespace = ".", merger?: Merger
 
     const value = (baseObject as Record<string, any>)[key];
 
-    if (value === null || value === undefined) {
+    if (!allowNullish && (value === null || value === undefined)) {
       continue;
     }
 
@@ -32,6 +32,7 @@ function _defu<T>(baseObject: T, defaults: any, namespace = ".", merger?: Merger
         object[key],
         (namespace ? `${namespace}.` : "") + key.toString(),
         merger,
+        allowNullish,
       );
     } else {
       object[key] = value;
@@ -41,11 +42,20 @@ function _defu<T>(baseObject: T, defaults: any, namespace = ".", merger?: Merger
   return object;
 }
 
-// Create defu wrapper with optional merger and multi arg support
-export function createDefu(merger?: Merger): DefuFunction {
+// Create defu wrapper with optional merger and multi arg support. Pass
+// `{ allowNullish: true }` to also copy explicit `null`/`undefined` values from
+// the base object (bringing back nullish-override support via option). See #95.
+export function createDefu(
+  merger?: Merger,
+  options: { allowNullish?: boolean } = {},
+): DefuFunction {
+  const allowNullish = !!options.allowNullish;
   return (...arguments_) =>
     // eslint-disable-next-line unicorn/no-array-reduce
-    arguments_.reduce((p, c) => _defu(p, c, "", merger), {} as any);
+    arguments_.reduce(
+      (p, c) => _defu(p, c, "", merger, allowNullish),
+      {} as any,
+    );
 }
 
 // Standard version
