@@ -2,9 +2,9 @@ import { isPlainObject } from "./_utils";
 import type { Merger, DefuFn as DefuFunction, DefuInstance } from "./types";
 
 // Base function to apply defaults
-function _defu<T>(baseObject: T, defaults: any, namespace = ".", merger?: Merger): T {
+function _defu<T>(baseObject: T, defaults: any, namespace = ".", merger?: Merger, warnDuplicates = false): T {
   if (!isPlainObject(defaults)) {
-    return _defu(baseObject, {}, namespace, merger);
+    return _defu(baseObject, {}, namespace, merger, warnDuplicates);
   }
 
   const object = { ...defaults };
@@ -32,8 +32,15 @@ function _defu<T>(baseObject: T, defaults: any, namespace = ".", merger?: Merger
         object[key],
         (namespace ? `${namespace}.` : "") + key.toString(),
         merger,
+        warnDuplicates,
       );
     } else {
+      if (warnDuplicates && key in defaults) {
+        // eslint-disable-next-line no-console
+        console.warn(
+          `[defu] Redundant property "${(namespace ? `${namespace}.` : "") + key}" is already specified with a default value.`,
+        );
+      }
       object[key] = value;
     }
   }
@@ -41,11 +48,18 @@ function _defu<T>(baseObject: T, defaults: any, namespace = ".", merger?: Merger
   return object;
 }
 
-// Create defu wrapper with optional merger and multi arg support
-export function createDefu(merger?: Merger): DefuFunction {
+// Create defu wrapper with optional merger and multi arg support. Pass
+// `{ warnDuplicates: true }` to log a warning when a base-property value
+// overrides a property that already exists in the defaults (redundant
+// duplication). See issue #128.
+export function createDefu(
+  merger?: Merger,
+  options: { warnDuplicates?: boolean } = {},
+): DefuFunction {
+  const warnDuplicates = !!options.warnDuplicates;
   return (...arguments_) =>
     // eslint-disable-next-line unicorn/no-array-reduce
-    arguments_.reduce((p, c) => _defu(p, c, "", merger), {} as any);
+    arguments_.reduce((p, c) => _defu(p, c, "", merger, warnDuplicates), {} as any);
 }
 
 // Standard version
