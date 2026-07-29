@@ -9,8 +9,8 @@ function _defu<T>(baseObject: T, defaults: any, namespace = ".", merger?: Merger
 
   const object = { ...defaults };
 
-  for (const key of Object.keys(baseObject as Record<string, any>)) {
-    if (key === "__proto__" || key === "constructor") {
+  for (const key of Reflect.ownKeys(baseObject as Record<string, any>)) {
+    if (typeof key === "string" && (key === "__proto__" || key === "constructor")) {
       continue;
     }
 
@@ -54,16 +54,26 @@ export default defu;
 
 // Custom version with function merge support
 export const defuFn = createDefu((object, key, currentValue) => {
-  if (object[key] !== undefined && typeof currentValue === "function") {
-    object[key] = currentValue(object[key]);
-    return true;
+  if (object[key] !== undefined) {
+    if (typeof currentValue === "function") {
+      object[key] = currentValue(object[key]);
+      return true;
+    }
+    if (typeof object[key] === "function") {
+      object[key] = object[key](currentValue);
+      return true;
+    }
   }
 });
 
 // Custom version with function merge support only for defined arrays
 export const defuArrayFn = createDefu((object, key, currentValue) => {
-  if (Array.isArray(object[key]) && typeof currentValue === "function") {
+  if (typeof currentValue === "function" && Array.isArray(object[key])) {
     object[key] = currentValue(object[key]);
+    return true;
+  }
+  if (typeof object[key] === "function") {
+    object[key] = object[key](currentValue);
     return true;
   }
 });
