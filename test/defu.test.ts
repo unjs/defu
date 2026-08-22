@@ -214,6 +214,23 @@ describe("defu", () => {
       num: 20,
       ignored: num,
     });
+    expect(
+      defuFn(
+        {
+          ignore: ["node_modules", "dist"],
+          num: 10,
+        },
+        {
+          ignore: (val: any) => val.filter((i: any) => i !== "dist"),
+          num,
+          ignored: num,
+        },
+      ),
+    ).toEqual({
+      ignore: ["node_modules"],
+      num: 20,
+      ignored: num,
+    });
   });
 
   it("defuArrayFn()", () => {
@@ -233,6 +250,21 @@ describe("defu", () => {
     ).toEqual({
       arr: ["c"],
       num,
+    });
+    expect(
+      defuArrayFn(
+        {
+          arr: ["a", "b"],
+          num: 10,
+        },
+        {
+          arr: () => ["c"],
+          num,
+        },
+      ),
+    ).toEqual({
+      arr: ["c"],
+      num: 10,
     });
   });
 
