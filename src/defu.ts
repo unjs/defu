@@ -57,6 +57,9 @@ export const defuFn = createDefu((object, key, currentValue) => {
   if (object[key] !== undefined && typeof currentValue === "function") {
     object[key] = currentValue(object[key]);
     return true;
+  } else if (typeof object[key] === "function" && currentValue !== undefined) {
+    object[key] = object[key](currentValue);
+    return true;
   }
 });
 
@@ -64,6 +67,9 @@ export const defuFn = createDefu((object, key, currentValue) => {
 export const defuArrayFn = createDefu((object, key, currentValue) => {
   if (Array.isArray(object[key]) && typeof currentValue === "function") {
     object[key] = currentValue(object[key]);
+    return true;
+  } else if (typeof object[key] === "function" && Array.isArray(currentValue)) {
+    object[key] = object[key](currentValue);
     return true;
   }
 });
