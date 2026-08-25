@@ -10,7 +10,11 @@ function _defu<T>(baseObject: T, defaults: any, namespace = ".", merger?: Merger
   const object = { ...defaults };
 
   for (const key of Reflect.ownKeys(baseObject as Record<string | symbol, any>)) {
-    if (key === "__proto__" || key === "constructor") {
+    if (
+      key === "__proto__" ||
+      key === "constructor" ||
+      !Object.prototype.propertyIsEnumerable.call(baseObject, key)
+    ) {
       continue;
     }
 

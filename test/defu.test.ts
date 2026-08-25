@@ -276,4 +276,11 @@ describe("defu", () => {
     const result = defu({ [a]: "a", [c]: ["a", "b"] }, { [a]: "bbb", [b]: "c", [c]: ["c", "d"] });
     expect(result).toEqual({ [a]: "a", [b]: "c", [c]: ["a", "b", "c", "d"] });
   });
+  it("does not copy non-enumerable properties", () => {
+    const base = {};
+    Object.defineProperty(base, "hidden", { value: "secret", enumerable: false });
+    const result = defu(base, { fallback: "value" });
+    expect(result).toEqual({ fallback: "value" });
+    expect((result as any).hidden).toBeUndefined();
+  });
 });
