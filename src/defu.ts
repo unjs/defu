@@ -9,18 +9,18 @@ function _defu<T>(baseObject: T, defaults: any, namespace = ".", merger?: Merger
 
   const object = { ...defaults };
 
-  for (const key of Object.keys(baseObject as Record<string, any>)) {
+  for (const key of Reflect.ownKeys(baseObject as Record<string | symbol, any>)) {
     if (key === "__proto__" || key === "constructor") {
       continue;
     }
 
-    const value = (baseObject as Record<string, any>)[key];
+    const value = (baseObject as Record<string | symbol, any>)[key];
 
     if (value === null || value === undefined) {
       continue;
     }
 
-    if (merger && merger(object, key, value, namespace)) {
+    if (merger && merger(object, key as any, value, namespace)) {
       continue;
     }
 
