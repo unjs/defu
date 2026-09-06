@@ -255,6 +255,18 @@ describe("defu", () => {
     });
   });
 
+  it("should merge symbol keys", () => {
+    const a = Symbol("a");
+    const b = Symbol("b");
+    const c = Symbol("c");
+    const result = defu({ [a]: "a", [c]: ["a", "b"] }, { [a]: "bbb", [b]: "c", [c]: ["c", "d"] });
+    expect(result).toEqual({
+      [a]: "a",
+      [b]: "c",
+      [c]: ["a", "b", "c", "d"],
+    });
+  });
+
   it("works with asterisk-import", () => {
     expect(
       defu(asteriskImport, {

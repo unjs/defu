@@ -9,12 +9,22 @@ function _defu<T>(baseObject: T, defaults: any, namespace = ".", merger?: Merger
 
   const object = { ...defaults };
 
-  for (const key of Object.keys(baseObject as Record<string, any>)) {
+  // Merge both string and (enumerable) symbol keys. The `Input` type allows
+  // symbol keys and `{ ...defaults }` already carries the defaults' symbols
+  // over, so the base object's symbol keys must be merged too.
+  const baseKeys: Array<string | symbol> = [
+    ...Object.keys(baseObject as Record<string, any>),
+    ...Object.getOwnPropertySymbols(baseObject as object).filter((symbol) =>
+      Object.prototype.propertyIsEnumerable.call(baseObject, symbol),
+    ),
+  ];
+
+  for (const key of baseKeys) {
     if (key === "__proto__" || key === "constructor") {
       continue;
     }
 
-    const value = (baseObject as Record<string, any>)[key];
+    const value = (baseObject as Record<string | symbol, any>)[key];
 
     if (value === null || value === undefined) {
       continue;
