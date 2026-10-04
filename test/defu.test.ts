@@ -135,6 +135,17 @@ describe("defu", () => {
     }
   });
 
+  it("should merge symbol keys", () => {
+    const [a, b, c] = [Symbol("a"), Symbol("b"), Symbol("c")];
+    const result = defu({ [a]: "a", [c]: ["a", "b"] }, { [a]: "bbb", [b]: "c", [c]: ["c", "d"] });
+    expect(result).toEqual({ [a]: "a", [b]: "c", [c]: ["a", "b", "c", "d"] });
+    expectTypeOf(result).toMatchTypeOf<{
+      [a]: string;
+      [b]: string;
+      [c]: string[];
+    }>();
+  });
+
   it("should ignore non-object arguments", () => {
     expect(defu(null, { foo: 1 }, false, 123, { bar: 2 })).toEqual({
       foo: 1,
