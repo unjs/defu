@@ -9,12 +9,20 @@ function _defu<T>(baseObject: T, defaults: any, namespace = ".", merger?: Merger
 
   const object = { ...defaults };
 
-  for (const key of Object.keys(baseObject as Record<string, any>)) {
+  // `Object.keys()` ignores symbol keys, so also iterate over enumerable own symbols.
+  const keys: Array<string | symbol> = [
+    ...Object.keys(baseObject as Record<string, any>),
+    ...Object.getOwnPropertySymbols(baseObject).filter((symbol) =>
+      Object.prototype.propertyIsEnumerable.call(baseObject, symbol),
+    ),
+  ];
+
+  for (const key of keys) {
     if (key === "__proto__" || key === "constructor") {
       continue;
     }
 
-    const value = (baseObject as Record<string, any>)[key];
+    const value = (baseObject as Record<string | symbol, any>)[key];
 
     if (value === null || value === undefined) {
       continue;
