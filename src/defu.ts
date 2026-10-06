@@ -54,7 +54,11 @@ export default defu;
 
 // Custom version with function merge support
 export const defuFn = createDefu((object, key, currentValue) => {
-  if (object[key] !== undefined && typeof currentValue === "function") {
+  if (
+    Object.hasOwn(object, key) &&
+    object[key] !== undefined &&
+    typeof currentValue === "function"
+  ) {
     object[key] = currentValue(object[key]);
     return true;
   }

@@ -1,5 +1,5 @@
 import { expectTypeOf } from "expect-type";
-import { it, describe, expect } from "vitest";
+import { it, describe, expect, vi } from "vitest";
 import { defu, createDefu, defuFn, defuArrayFn } from "../src/defu";
 import * as asteriskImport from "./fixtures/";
 
@@ -271,4 +271,21 @@ describe("defu", () => {
       },
     });
   });
+});
+
+it("does not invoke defuFn functions for inherited default properties", () => {
+  const toString = vi.fn(() => "custom");
+  const valueOf = vi.fn(() => 42);
+  const result = defuFn({ toString, valueOf }, {});
+  expect(result.toString).toBe(toString);
+  expect(result.valueOf).toBe(valueOf);
+  expect(toString).not.toHaveBeenCalled();
+  expect(valueOf).not.toHaveBeenCalled();
+});
+
+it("invokes defuFn for an explicitly provided toString default", () => {
+  const defaultValue = () => "default";
+  const transform = vi.fn((value) => value());
+  expect(defuFn({ toString: transform }, { toString: defaultValue }).toString).toBe("default");
+  expect(transform).toHaveBeenCalledExactlyOnceWith(defaultValue);
 });
