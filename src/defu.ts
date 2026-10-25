@@ -49,11 +49,11 @@ export function createDefu(merger?: Merger): DefuFunction {
 }
 
 // Standard version
-export const defu = createDefu() as DefuInstance;
+export const defu = /*#__PURE__*/ createDefu() as DefuInstance;
 export default defu;
 
 // Custom version with function merge support
-export const defuFn = createDefu((object, key, currentValue) => {
+export const defuFn = /*#__PURE__*/ createDefu((object, key, currentValue) => {
   if (object[key] !== undefined && typeof currentValue === "function") {
     object[key] = currentValue(object[key]);
     return true;
@@ -61,7 +61,7 @@ export const defuFn = createDefu((object, key, currentValue) => {
 });
 
 // Custom version with function merge support only for defined arrays
-export const defuArrayFn = createDefu((object, key, currentValue) => {
+export const defuArrayFn = /*#__PURE__*/ createDefu((object, key, currentValue) => {
   if (Array.isArray(object[key]) && typeof currentValue === "function") {
     object[key] = currentValue(object[key]);
     return true;
