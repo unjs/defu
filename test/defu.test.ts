@@ -265,6 +265,11 @@ describe("defu", () => {
       [b]: "c",
       [c]: ["a", "b", "c", "d"],
     });
+    expectTypeOf(result).toMatchTypeOf<{
+      [a]: string;
+      [b]: string;
+      [c]: string[];
+    }>();
   });
 
   it("should merge nested objects under symbol keys", () => {
