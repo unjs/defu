@@ -255,6 +255,67 @@ describe("defu", () => {
     });
   });
 
+  it("should merge symbol keys", () => {
+    const a = Symbol("a");
+    const b = Symbol("b");
+    const c = Symbol("c");
+    const result = defu({ [a]: "a", [c]: ["a", "b"] }, { [a]: "bbb", [b]: "c", [c]: ["c", "d"] });
+    expect(result).toEqual({
+      [a]: "a",
+      [b]: "c",
+      [c]: ["a", "b", "c", "d"],
+    });
+    expectTypeOf(result).toMatchTypeOf<{
+      [a]: string;
+      [b]: string;
+      [c]: string[];
+    }>();
+  });
+
+  it("should merge nested objects under symbol keys", () => {
+    const key = Symbol("key");
+    const result = defu({ [key]: { a: "c" } }, { [key]: { a: "bbb", d: "c" } });
+    expect(result).toEqual({ [key]: { a: "c", d: "c" } });
+  });
+
+  it("should ignore inherited and non-enumerable symbol keys", () => {
+    const inherited = Symbol("inherited");
+    const hidden = Symbol("hidden");
+
+    Object.defineProperty(Object.prototype, inherited, {
+      value: "from prototype",
+      enumerable: true,
+      configurable: true,
+      writable: true,
+    });
+
+    try {
+      const base: Record<PropertyKey, unknown> = { own: "own" };
+      Object.defineProperty(base, hidden, {
+        value: "not enumerable",
+        enumerable: false,
+      });
+
+      const result = defu(base, {});
+      expect(result).toEqual({ own: "own" });
+      expect(Object.getOwnPropertySymbols(result)).toEqual([]);
+    } finally {
+      delete (Object.prototype as Record<PropertyKey, unknown>)[inherited];
+    }
+  });
+
+  it("custom merger receives symbol keys", () => {
+    const key = Symbol("key");
+    const seen: PropertyKey[] = [];
+    const merger = createDefu((_object, mergedKey) => {
+      seen.push(mergedKey);
+      return false;
+    });
+
+    merger({ [key]: "a", plain: "b" }, { [key]: "c" });
+    expect(seen).toEqual(["plain", key]);
+  });
+
   it("works with asterisk-import", () => {
     expect(
       defu(asteriskImport, {
